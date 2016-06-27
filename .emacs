@@ -28,15 +28,11 @@ Return a list of installed packages or nil for every skipped package."
 (package-initialize)
 
 ;; Assuming you wish to install "iedit" and "magit"
-(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile)
+(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package)
 
 ;; Disable autosave
 (setq auto-save-default nil)
 
-(require 'helm-projectile)
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
 
 (require 'powerline)
 (powerline-default-theme)
@@ -222,7 +218,7 @@ Return a list of installed packages or nil for every skipped package."
 (setq org-default-notes-file (expand-file-name "~/org/unsorted.org"))
 
 (setq org-refile-targets '((nil :maxlevel . 3)
-			   (org-agenda-files :maxlevel . 3) ("done.org" :maxlevel . 3 )))
+			   (org-agenda-files :maxlevel . 3) ("done.org" :maxlevel . 3 ) ("ideas.org" :maxlevel . 3)))
 (setq org-outline-path-complete-in-steps nil)         ; Refile in a single go
 (setq org-refile-use-outline-path t)                  ; Show full paths for refiling
 
@@ -247,13 +243,26 @@ Return a list of installed packages or nil for every skipped package."
 (setq org-agenda-include-diary t)
 
 (setq speedbar-supported-extension-expressions '(
-  ".md"
-  ".emacs"
-  ".rb"
-  ".exs"
-  ".ex"
-  ".eex"
-  ))
+						 ".md"
+						 ".emacs"
+						 ".rb"
+						 ".exs"
+						 ".ex"
+						 ".eex"
+						 ))
 
 (add-hook 'term-mode-hook (lambda()
-        (setq yas-dont-activate t)))
+			    (setq yas-dont-activate t)))
+(use-package helm-projectile
+  :ensure t
+  :init
+  (projectile-global-mode)
+  (helm-projectile-on)
+  (setq projectile-completion-system 'helm)
+  (setq projectile-switch-project-action 'helm-projectile)
+  (defvar helm-source-file-not-found
+    (helm-build-dummy-source
+        "Create file"
+      :action 'find-file))
+  (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
+  )
