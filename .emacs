@@ -203,11 +203,6 @@ Return a list of installed packages or nil for every skipped package."
 
 (load-theme 'dracula)
 
-(set-face-attribute 'mode-line nil
-		    :foreground "White"
-		    :background "DarkOrange"
-		    :box nil)
-
 (display-time-mode t)
 (fancy-battery-mode t)
 (menu-bar-mode 0)
