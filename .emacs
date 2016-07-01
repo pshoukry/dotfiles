@@ -28,11 +28,10 @@ Return a list of installed packages or nil for every skipped package."
 (package-initialize)
 
 ;; Assuming you wish to install "iedit" and "magit"
-(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package)
+(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package 'minitest 'slim-mode 'ujelly-theme 'dracula-theme)
 
 ;; Disable autosave
 (setq auto-save-default nil)
-
 
 (require 'powerline)
 (powerline-default-theme)
@@ -188,7 +187,7 @@ Return a list of installed packages or nil for every skipped package."
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" default)))
+    ("d1abda58eedee72fbe28bbb7a5ff1953e1b7d2fa80913bcea9cb3cf12cf751f4" "f9805a89d4309ca29b68c4a6b3d8f13f7931603e59b881515a27535d6ffa1a6e" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" default)))
  '(git-gutter:added-sign "+")
  '(git-gutter:deleted-sign "-")
  '(git-gutter:modified-sign "~")
@@ -202,7 +201,7 @@ Return a list of installed packages or nil for every skipped package."
  ;; If there is more than one, they won't work right.
  )
 
-(load-theme 'wombat)
+(load-theme 'dracula)
 
 (set-face-attribute 'mode-line nil
 		    :foreground "White"
@@ -262,7 +261,13 @@ Return a list of installed packages or nil for every skipped package."
   (setq projectile-switch-project-action 'helm-projectile)
   (defvar helm-source-file-not-found
     (helm-build-dummy-source
-        "Create file"
+	"Create file"
       :action 'find-file))
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
   )
+
+(require 'minitest)
+(add-hook 'ruby-mode-hook 'minitest-mode)
+(eval-after-load 'minitest '(minitest-install-snippets))
+
+(require 'slim-mode)
