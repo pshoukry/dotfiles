@@ -266,3 +266,9 @@ Return a list of installed packages or nil for every skipped package."
 (eval-after-load 'minitest '(minitest-install-snippets))
 
 (require 'slim-mode)
+
+;; Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
+(defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive)
+    (revert-buffer t t))
