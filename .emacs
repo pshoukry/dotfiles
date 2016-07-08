@@ -28,7 +28,7 @@ Return a list of installed packages or nil for every skipped package."
 (package-initialize)
 
 ;; Assuming you wish to install "iedit" and "magit"
-(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package 'minitest 'slim-mode 'ujelly-theme 'dracula-theme)
+(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package 'minitest 'slim-mode 'ujelly-theme 'dracula-theme 'haml-mode 'yaml-mode)
 
 ;; Disable autosave
 (setq auto-save-default nil)
@@ -193,7 +193,7 @@ Return a list of installed packages or nil for every skipped package."
  '(git-gutter:modified-sign "~")
  '(org-agenda-files
    (quote
-    ("~/org/daily.org" "~/org/unsorted.org" "~/org/projects.org"))))
+    ("~/work/projects/empreinte/doc/worklog.org" "~/org/daily.org" "~/org/unsorted.org" "~/org/projects.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -201,7 +201,9 @@ Return a list of installed packages or nil for every skipped package."
  ;; If there is more than one, they won't work right.
  )
 
-(load-theme 'dracula)
+(if (display-graphic-p) 
+    (load-theme 'dracula) 
+  (load-theme 'wombat))
 
 (display-time-mode t)
 (fancy-battery-mode t)
@@ -269,6 +271,18 @@ Return a list of installed packages or nil for every skipped package."
 
 ;; Source: http://www.emacswiki.org/emacs-en/download/misc-cmds.el
 (defun revert-buffer-no-confirm ()
-    "Revert buffer without confirmation."
-    (interactive)
-    (revert-buffer t t))
+  "Revert buffer without confirmation."
+  (interactive)
+  (revert-buffer t t))
+
+(add-hook 'haml-mode-hook
+	  (lambda ()
+	    (setq indent-tabs-mode nil)
+	    (define-key haml-mode-map "\C-m" 'newline-and-indent))
+	  )
+(add-hook 'yaml-mode-hook
+	  (lambda ()
+	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+(add-to-list 'default-frame-alist '(height . 24))
+(add-to-list 'default-frame-alist '(width . 80))
