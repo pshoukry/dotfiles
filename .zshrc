@@ -38,6 +38,8 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 bindkey '^R' history-incremental-search-backward
 alias dxa='export XSOCK=/tmp/.X11-unix && export XAUTH=/tmp/.docker.xauth && touch $XAUTH && xauth nlist $display | sed -e "s/^..../ffff/" | xauth -f $XAUTH nmerge -'
 
+alias em='emacs -nw'
+
 autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
 zle -N up-line-or-beginning-search
