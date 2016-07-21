@@ -28,7 +28,7 @@ Return a list of installed packages or nil for every skipped package."
 (package-initialize)
 
 ;; Assuming you wish to install "iedit" and "magit"
-(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package 'minitest 'slim-mode 'ujelly-theme 'dracula-theme 'haml-mode 'yaml-mode)
+(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package 'minitest 'slim-mode 'ujelly-theme 'dracula-theme 'haml-mode 'yaml-mode 'coffee-mode 'rubocop 'jbeans-theme)
 
 ;; Disable autosave
 (setq auto-save-default nil)
@@ -50,7 +50,7 @@ Return a list of installed packages or nil for every skipped package."
 (global-evil-mc-mode t)
 
 (global-company-mode t)
-(setq company-minimum-prefix-length 0)
+(setq company-minimum-prefix-length 1)
 
 (eval-after-load 'company
   '(push 'company-robe company-backends))
@@ -185,15 +185,17 @@ Return a list of installed packages or nil for every skipped package."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(coffee-args-compile (quote ("-c" "--no-header" "--bare")))
+ '(coffee-tab-width 2)
  '(custom-safe-themes
    (quote
-    ("d1abda58eedee72fbe28bbb7a5ff1953e1b7d2fa80913bcea9cb3cf12cf751f4" "f9805a89d4309ca29b68c4a6b3d8f13f7931603e59b881515a27535d6ffa1a6e" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" default)))
+    ("45712b65018922c9173439d9b1b193cb406f725f14d02c8c33e0d2cdad844613" "345f8f92edc3508574c61850b98a2e0a7a3f5ba3bb9ed03a50f6e41546fe2de0" "d1abda58eedee72fbe28bbb7a5ff1953e1b7d2fa80913bcea9cb3cf12cf751f4" "f9805a89d4309ca29b68c4a6b3d8f13f7931603e59b881515a27535d6ffa1a6e" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" default)))
  '(git-gutter:added-sign "+")
  '(git-gutter:deleted-sign "-")
  '(git-gutter:modified-sign "~")
  '(org-agenda-files
    (quote
-    ("~/work/projects/empreinte/doc/worklog.org" "~/org/daily.org" "~/org/unsorted.org" "~/org/projects.org"))))
+    ("~/org/daily.org" "~/org/unsorted.org" "~/org/projects.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -202,8 +204,8 @@ Return a list of installed packages or nil for every skipped package."
  )
 
 (if (display-graphic-p) 
-    (load-theme 'dracula) 
-  (load-theme 'wombat))
+    (load-theme 'ample-flat) 
+  (load-theme 'ample-flat))
 
 (display-time-mode t)
 (fancy-battery-mode t)
@@ -284,5 +286,15 @@ Return a list of installed packages or nil for every skipped package."
 	  (lambda ()
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-(add-to-list 'default-frame-alist '(height . 24))
+(add-to-list 'default-frame-alist '(height . 40))
 (add-to-list 'default-frame-alist '(width . 80))
+;; coffeescript
+
+
+(eval-after-load "coffee-mode"
+  '(progn
+     (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
+     (define-key coffee-mode-map (kbd "C-j") 'coffee-newline-and-indent)))
+
+(add-hook 'ruby-mode-hook 'rubocop-mode)
+(setq-default cursor-type '(bar . 1))

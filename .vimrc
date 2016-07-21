@@ -236,3 +236,6 @@ set laststatus=2
 set ttimeoutlen=50
 set t_ut=
 set mouse=
+
+let g:syntastic_ruby_checkers          = ['rubocop', 'mri']
+let g:syntastic_ruby_rubocop_exec      = '/usr/local/bin/rubocop' 
