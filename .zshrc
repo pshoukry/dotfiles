@@ -1,8 +1,10 @@
 # Set up the prompt
 
+source ~/work/opensource/zsh-git-prompt/zshrc.sh
 autoload -Uz promptinit
 promptinit
-prompt adam1
+# an example prompt
+PROMPT=$'%B%m%~%b$(git_super_status)\n%# '
 
 setopt histignorealldups sharehistory
 
@@ -39,6 +41,8 @@ bindkey '^R' history-incremental-search-backward
 alias dxa='export XSOCK=/tmp/.X11-unix && export XAUTH=/tmp/.docker.xauth && touch $XAUTH && xauth nlist $display | sed -e "s/^..../ffff/" | xauth -f $XAUTH nmerge -'
 
 alias em='emacs -nw'
+alias d='docker-compose run --rm'
+alias ds='docker-compose run --rm --service-ports'
 
 autoload up-line-or-beginning-search
 autoload down-line-or-beginning-search
@@ -47,3 +51,7 @@ zle -N down-line-or-beginning-search
 
 [[ -n "${key[Up]}"      ]]  && bindkey   "${key[Up]}"       up-line-or-beginning-search
 [[ -n "${key[Down]}"    ]]  && bindkey   "${key[Down]}"    down-line-or-beginning-search
+
+export PATH=~/work/opensource/dogma:$PATH
+export TERM=xterm-256color
+
