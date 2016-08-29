@@ -43,7 +43,7 @@ NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'chrisbra/NrrwRgn'
 "NeoBundle 'ervandew/supertab'
 NeoBundle 'severin-lemaignan/vim-minimap'
-NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'Yggdroot/indentLine'
 NeoBundle 'tpope/vim-eunuch'
 NeoBundle 'will133/vim-dirdiff'
 NeoBundle 'Konfekt/FastFold'
@@ -65,13 +65,17 @@ NeoBundle 'noahfrederick/vim-hemisu'
 NeoBundle 'jpo/vim-railscasts-theme'
 NeoBundle 'antlypls/vim-colors-codeschool'
 NeoBundle 'gosukiwi/vim-atom-dark/'
+NeoBundle 'vim-scripts/mayansmoke'
+NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'rakr/vim-one'
+NeoBundle 'dracula/vim'
 " Language Support
 " Ruby/Rails
 NeoBundle 'tpope/vim-rake'
 NeoBundle 'tpope/vim-rails'
 NeoBundle 'tpope/vim-bundler'
 
-" CoffeeScript
+" Coffee Script
 NeoBundle 'kchmck/vim-coffee-script'
 
 "Ember
@@ -79,7 +83,7 @@ NeoBundle 'kchmck/vim-coffee-script'
 NeoBundle 'mustache/vim-mustache-handlebars'
 NeoBundle 'chrisgillis/vim-bootstrap3-snippets'
 
-" Golang
+" Go Lang
 NeoBundle 'fatih/vim-go'
 
 "Quick notes and time tracking
@@ -119,7 +123,7 @@ set tabstop=2 shiftwidth=2 expandtab
 "autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 "autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
-autocmd Filetype go setlocal ts=4 sts=4 sw=4 noexpandtab 
+autocmd Filetype go setlocal ts=4 sts=4 sw=4 noexpandtab
 
 set number
 runtime macros/matchit.vim
@@ -168,7 +172,7 @@ else
     let g:neocomplete#keyword_patterns = {}
   endif
   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-endif 
+endif
 
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 
@@ -176,34 +180,41 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
 if has('gui_running')
-  set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+  set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 12
   set guioptions-=m  "remove menu bar
   set guioptions-=T  "remove toolbar
   set guioptions-=r  "remove right-hand scroll bar
-  set guioptions-=L  "remove left-hand scroll bar 
+  set guioptions-=L  "remove left-hand scroll bar
   set lines=55 columns=120
+
+  "let colorschemeirline_theme='one'
+  let g:hybrid_custom_term_colors = 1
   let g:jellybeans_use_term_italics = 1
-  colorscheme jellybeans 
-  "set background=dark
+  let g:one_allow_italics = 1 " I love italic for comments
+  colorscheme jellybeans
 else
-  "colorscheme jellybeans 
-  "set background=dark
-  colorscheme molokai 
+  let g:hybrid_custom_term_colors = 1
+  let g:jellybeans_use_term_italics = 1
+  colorscheme jellybeans
 endif
 
 if has('nvim')
   set t_Co=256
+  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+  let colorschemeirline_theme='one'
+  let g:hybrid_custom_term_colors = 1
   let g:jellybeans_use_term_italics = 1
-  colorscheme jellybeans  
+  let g:one_allow_italics = 1 " I love italic for comments
+  colorscheme jellybeans
 endif
 
 "Jasmine react tests
-au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete 
+au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
 autocmd FileType jasmine.javascript UltiSnipsAddFiletypes javascript-jasmine
 
 "Stylus
-au BufRead,BufNewFile *.styl set filetype=css syntax=css omnifunc=syntaxcomplete#Complete 
-autocmd FileType css UltiSnipsAddFiletypes css 
+au BufRead,BufNewFile *.styl set filetype=css syntax=css omnifunc=syntaxcomplete#Complete
+autocmd FileType css UltiSnipsAddFiletypes css
 
 "Better ruby omnicomplete
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -238,4 +249,14 @@ set t_ut=
 set mouse=
 
 let g:syntastic_ruby_checkers          = ['rubocop', 'mri']
-let g:syntastic_ruby_rubocop_exec      = '/usr/local/bin/rubocop' 
+let g:syntastic_ruby_rubocop_exec      = '/usr/local/bin/rubocop'
+let g:syntastic_enable_elixir_checker  = 1
+
+nmap <F5> :!emacs doc/worklog.org &<CR>
+nmap <F2> :grep -R --exclude-dir data --exclude-dir log --exclude-dir .git "
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight ExtraWhitespace guibg=red
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/

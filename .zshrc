@@ -53,5 +53,4 @@ zle -N down-line-or-beginning-search
 [[ -n "${key[Down]}"    ]]  && bindkey   "${key[Down]}"    down-line-or-beginning-search
 
 export PATH=~/work/opensource/dogma:$PATH
-export TERM=xterm-256color
-
+export TERM=screen-256color
