@@ -179,24 +179,18 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-if has('gui_running')
-  set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 12
-  set guioptions-=m  "remove menu bar
-  set guioptions-=T  "remove toolbar
-  set guioptions-=r  "remove right-hand scroll bar
-  set guioptions-=L  "remove left-hand scroll bar
-  set lines=55 columns=120
+set guifont=Source\ Code\ Pro\ Medium:h14
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+set lines=55 columns=120
 
-  "let colorschemeirline_theme='one'
-  let g:hybrid_custom_term_colors = 1
-  let g:jellybeans_use_term_italics = 1
-  let g:one_allow_italics = 1 " I love italic for comments
-  colorscheme jellybeans
-else
-  let g:hybrid_custom_term_colors = 1
-  let g:jellybeans_use_term_italics = 1
-  colorscheme jellybeans
-endif
+"let colorschemeirline_theme='one'
+let g:hybrid_custom_term_colors = 1
+let g:jellybeans_use_term_italics = 1
+let g:one_allow_italics = 1 " I love italic for comments
+colorscheme jellybeans
 
 if has('nvim')
   set t_Co=256
