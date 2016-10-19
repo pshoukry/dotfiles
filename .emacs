@@ -200,7 +200,10 @@ Return a list of installed packages or nil for every skipped package."
  '(git-gutter:modified-sign "~")
  '(org-agenda-files
    (quote
-    ("~/org/daily.org" "~/org/unsorted.org" "~/org/projects.org"))))
+    ("~/org/daily.org" "~/org/unsorted.org" "~/org/projects.org")))
+ '(package-selected-packages
+   (quote
+    (synonyms evil-matchit jbeans-theme rubocop coffee-mode yaml-mode haml-mode dracula-theme ujelly-theme slim-mode minitest use-package helm-projectile projectile sr-speedbar minimap indent-guide markdown-mode fancy-battery evil-mc ample-theme dockerfile-mode robe git-gutter ctags powerline yasnippet alchemist flycheck evil helm magit iedit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

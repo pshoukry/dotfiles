@@ -35,7 +35,8 @@ NeoBundle 'tpope/vim-surround'
 
 " Navigation and usability
 NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'christoomey/vim-tmux-navigator'
 NeoBundle 'terryma/vim-multiple-cursors'
@@ -110,6 +111,9 @@ NeoBundle 'JulesWang/css.vim'
 "React
 NeoBundle 'mxw/vim-jsx'
 
+"IOS
+NeoBundle 'eraserhd/vim-ios'
+
 call neobundle#end()
 
 " If there are uninstalled bundles found on startup,
@@ -179,28 +183,19 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 " airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
-set guifont=Source\ Code\ Pro\ Medium:h14
+let g:airline_theme='wombat'
+set guifont=Sauce\ Code\ Powerline:h14
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set lines=55 columns=120
 
-"let colorschemeirline_theme='one'
 let g:hybrid_custom_term_colors = 1
 let g:jellybeans_use_term_italics = 1
 let g:one_allow_italics = 1 " I love italic for comments
-colorscheme jellybeans
-
-if has('nvim')
-  set t_Co=256
-  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  let colorschemeirline_theme='one'
-  let g:hybrid_custom_term_colors = 1
-  let g:jellybeans_use_term_italics = 1
-  let g:one_allow_italics = 1 " I love italic for comments
-  colorscheme jellybeans
-endif
+set background=dark
+colorscheme one
 
 "Jasmine react tests
 au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
@@ -255,5 +250,19 @@ au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
+highlight Pmenu ctermfg=black ctermbg=white
+highlight PmenuSel ctermfg=white ctermbg=black
+highlight Comment ctermfg=Black ctermbg=DarkGray
+highlight SpellBad ctermbg=DarkGray ctermfg=Black
 set hlsearch
-hi search guibg=Yellow
+"hi search guibg=Yellow
+set backspace=indent,eol,start
+
+" Custom maps
+nnoremap \ed :!dogma %:p:h
+nnoremap \et :!docker-compose run --rm web mix test
+
+autocmd BufWritePre * %s/\s\+$//e
+:inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
+:inoremap \it <C-R>=strftime("%I:%M%p")<CR>
+
