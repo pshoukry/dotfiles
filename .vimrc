@@ -195,7 +195,11 @@ let g:hybrid_custom_term_colors = 1
 let g:jellybeans_use_term_italics = 1
 let g:one_allow_italics = 1 " I love italic for comments
 set background=dark
-colorscheme one
+if has("gui_macvim")
+  colorscheme jellybeans
+else
+  colorscheme jellybeans
+end
 
 "Jasmine react tests
 au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
@@ -260,9 +264,9 @@ set backspace=indent,eol,start
 
 " Custom maps
 nnoremap \ed :!dogma %:p:h
+nnoremap \ec :!mix credo
 nnoremap \et :!docker-compose run --rm web mix test
 
 autocmd BufWritePre * %s/\s\+$//e
 :inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
 :inoremap \it <C-R>=strftime("%I:%M%p")<CR>
-
