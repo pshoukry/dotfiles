@@ -189,7 +189,7 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set lines=55 columns=120
+set lines=55 columns=100
 
 let g:hybrid_custom_term_colors = 1
 let g:jellybeans_use_term_italics = 1
@@ -257,13 +257,15 @@ au InsertLeave * match ExtraWhiteSpace /\s\+$/
 highlight Pmenu ctermfg=black ctermbg=white
 highlight PmenuSel ctermfg=white ctermbg=black
 highlight Comment ctermfg=Black ctermbg=DarkGray
+highlight Normal ctermbg=Black
+highlight NonText ctermbg=Black
 highlight SpellBad ctermbg=DarkGray ctermfg=Black
 set hlsearch
 "hi search guibg=Yellow
 set backspace=indent,eol,start
 
 " Custom maps
-nnoremap \ed :!dogma %:p:h
+nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo
 nnoremap \et :!docker-compose run --rm web mix test
 
