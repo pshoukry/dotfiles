@@ -103,6 +103,7 @@ NeoBundle 'digitaltoad/vim-jade'
 "Elixir
 NeoBundle 'elixir-lang/vim-elixir'
 NeoBundle 'avdgaag/vim-phoenix'
+NeoBundle 'slashmili/alchemist.vim'
 
 "css
 NeoBundle 'genoma/vim-less'
@@ -176,6 +177,9 @@ else
     let g:neocomplete#keyword_patterns = {}
   endif
   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
 endif
 
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
