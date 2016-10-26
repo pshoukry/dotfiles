@@ -26,10 +26,8 @@ call dein#add('airblade/vim-gitgutter')
 
 " Syntax
 call dein#add('scrooloose/syntastic')
-"call dein#add('SirVer/ultisnips')
 call dein#add('tomtom/tlib_vim')
 call dein#add('MarcWeber/vim-addon-mw-utils')
-"call dein#add('honza/vim-snippets')
 call dein#add('tpope/vim-surround')
 
 " Navigation and usability
@@ -41,7 +39,6 @@ call dein#add('christoomey/vim-tmux-navigator')
 call dein#add('terryma/vim-multiple-cursors')
 call dein#add('tpope/vim-unimpaired')
 call dein#add('chrisbra/NrrwRgn')
-"call dein#add('ervandew/supertab')
 call dein#add('severin-lemaignan/vim-minimap')
 call dein#add('Yggdroot/indentLine')
 call dein#add('tpope/vim-eunuch')
@@ -55,7 +52,7 @@ else
 endif
 
 call dein#add('jiangmiao/auto-pairs')
-"call dein#add('vim-scripts/AutoComplPop')
+
 " Colorschemes
 call dein#add('morhetz/gruvbox')
 call dein#add('altercation/vim-colors-solarized')
@@ -68,6 +65,7 @@ call dein#add('vim-scripts/mayansmoke')
 call dein#add('w0ng/vim-hybrid')
 call dein#add('rakr/vim-one')
 call dein#add('dracula/vim')
+
 " Language Support
 " Ruby/Rails
 call dein#add('tpope/vim-rake')
@@ -138,6 +136,7 @@ set nowrap
 
 " ctrlp
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|bower_components|tmp|deps|_build|rel)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_map = 'f'
 "Tagbar
 nmap <F12> :TagbarToggle<CR>
 
@@ -147,54 +146,20 @@ if has('nvim')
   let g:deoplete#enable_smart_case = 1
   let g:deoplete#auto_completion_start_length = 1
   let g:deoplete#sources#syntax#min_keyword_length = 1
-  let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
-  let g:deoplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-  " Define keyword.
-  if !exists('g:deoplete#keyword_patterns')
-    let g:deoplete#keyword_patterns = {}
-  endif
-  let g:deoplete#keyword_patterns['default'] = '\h\w*'
-
-  if !exists('g:deoplete#sources#omni#input_patterns')
-    let g:deoplete#sources#omni#input_patterns = {}
-  endif
 else
   let g:neocomplete#enable_at_startup = 1
-  " Use smartcase.
   let g:neocomplete#enable_smart_case = 1
-  " " Set minimum syntax keyword length.
   let g:neocomplete#auto_completion_start_length = 1
   let g:neocomplete#sources#syntax#min_keyword_length = 1
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-  let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-  " Define keyword.
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
 endif
 
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 
-set background=dark
+set background=light
 if has("gui_macvim")
-  colorscheme one
+  colorscheme hemisu
 else
-  colorscheme one
+  colorscheme hemisu
 end
 
 "Jasmine react tests
@@ -225,7 +190,6 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
 let g:syntastic_ruby_checkers          = ['rubocop', 'mri']
-let g:syntastic_ruby_rubocop_exec      = '/usr/local/bin/rubocop'
 let g:syntastic_enable_elixir_checker  = 1
 
 "Airline
@@ -239,16 +203,14 @@ au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
-if !has("nvim")
-  highlight Comment ctermfg=Black ctermbg=DarkGray
-endif
-highlight Search ctermbg=LightYellow ctermfg=DarkGray
 set backspace=indent,eol,start
-
+"Neo Snippets
 imap <s-tab>     <Plug>(neosnippet_expand_or_jump)
 smap <s-tab>     <Plug>(neosnippet_expand_or_jump)
 xmap <s-tab>     <Plug>(neosnippet_expand_target)
-highlight Pmenu ctermbg=White ctermfg=black
+let g:neosnippet#snippets_directory="~/.vim/Snippets"
+
+nnoremap gn :bn<cr>
 
 " Custom maps
 nnoremap \ed :!dogma %:p
