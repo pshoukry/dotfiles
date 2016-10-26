@@ -155,11 +155,11 @@ endif
 
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 
-set background=light
+set background=dark
 if has("gui_macvim")
-  colorscheme hemisu
+  colorscheme hybid
 else
-  colorscheme hemisu
+  colorscheme hybrid
 end
 
 "Jasmine react tests
@@ -198,7 +198,7 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='wombat'
 
 highlight ExtraWhitespace ctermbg=red guibg=red
-au ColorScheme * highlight ExtraWhitespace guibg=red
+au ColorScheme * highlight ExtraWhitespace guibg=DarkRed
 au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
