@@ -34,7 +34,7 @@ NeoBundle 'honza/vim-snippets'
 NeoBundle 'tpope/vim-surround'
 
 " Navigation and usability
-NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'majutsushi/tagbar'
@@ -144,9 +144,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 " ctrlp
-let g:ctrlp_show_hidden = 1
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|bower_components|tmp|deps|_build|rel)|(\.(swp|ico|git|svn))$'
-let g:ctrlp_working_path_mode = '0'
 "Tagbar
 nmap <F12> :TagbarToggle<CR>
 
@@ -158,6 +156,22 @@ if has('nvim')
   let g:deoplete#enable_smart_case = 1
   let g:deoplete#auto_completion_start_length = 1
   let g:deoplete#sources#syntax#min_keyword_length = 1
+  let g:deoplete#lock_buffer_name_pattern = '\*ku\*'
+  let g:deoplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+  " Define keyword.
+  if !exists('g:deoplete#keyword_patterns')
+    let g:deoplete#keyword_patterns = {}
+  endif
+  let g:deoplete#keyword_patterns['default'] = '\h\w*'
+
+  if !exists('g:deoplete#sources#omni#input_patterns')
+    let g:deoplete#sources#omni#input_patterns = {}
+  endif
 else
   let g:neocomplete#enable_at_startup = 1
   " Use smartcase.
@@ -194,7 +208,6 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set lines=55 columns=100
 
 let g:hybrid_custom_term_colors = 1
 let g:jellybeans_use_term_italics = 1
@@ -237,7 +250,6 @@ let g:go_fmt_command = "goimports"
 set foldmethod=syntax
 set foldlevelstart=20
 set smartindent
-nnoremap <F9> za
 let g:indent_guides_enable_on_vim_startup = 0
 "Vim Airline
 let g:airline#extensions#tabline#enabled = 1
@@ -250,7 +262,6 @@ let g:syntastic_ruby_checkers          = ['rubocop', 'mri']
 let g:syntastic_ruby_rubocop_exec      = '/usr/local/bin/rubocop'
 let g:syntastic_enable_elixir_checker  = 1
 
-nmap <F5> :!emacs doc/worklog.org &<CR>
 nmap <F2> :grep -R --exclude-dir data --exclude-dir log --exclude-dir .git "
 
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -259,9 +270,10 @@ au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
-highlight Comment ctermfg=Black ctermbg=DarkGray
+if !has("nvim")
+  highlight Comment ctermfg=Black ctermbg=DarkGray
+endif
 highlight Search ctermbg=LightYellow ctermfg=DarkGray
-set hlsearch
 set backspace=indent,eol,start
 
 " Custom maps
