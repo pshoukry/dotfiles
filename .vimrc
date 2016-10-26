@@ -177,6 +177,7 @@ else
     let g:neocomplete#keyword_patterns = {}
   endif
   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
   if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
   endif
@@ -258,14 +259,9 @@ au BufEnter * match ExtraWhitespace /\s\+$/
 au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
-highlight Pmenu ctermfg=black ctermbg=white
-highlight PmenuSel ctermfg=white ctermbg=black
 highlight Comment ctermfg=Black ctermbg=DarkGray
-highlight Normal ctermbg=Black
-highlight NonText ctermbg=Black
-highlight SpellBad ctermbg=DarkGray ctermfg=Black
+highlight Search ctermbg=LightYellow ctermfg=DarkGray
 set hlsearch
-"hi search guibg=Yellow
 set backspace=indent,eol,start
 
 " Custom maps
