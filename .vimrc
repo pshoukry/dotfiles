@@ -1,128 +1,129 @@
-" Note: Skip initialization for vim-tiny or vim-small.
-if 0 | endif
 
-if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-
-  filetype off
-
-  " Required:
-  set runtimepath^=~/.vim/bundle/neobundle.vim/
+if &compatible
+  set nocompatible               " Be iMproved
 endif
 
 " Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim
 
-" Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+call dein#begin('~/.vim')
 
-" My Bundles here:
-"Git support
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'L9'
-NeoBundle 'airblade/vim-gitgutter'
+" Let dein manage dein
+" Required:
+call dein#add('Shougo/dein.vim')
+
+" Add or remove your plugins here:
+call dein#add('Shougo/neosnippet.vim')
+call dein#add('Shougo/neosnippet-snippets')
+
+" You can specify revision/branch/tag.
+call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+call dein#add('tpope/vim-fugitive')
+call dein#add('L9')
+call dein#add('airblade/vim-gitgutter')
 
 " Syntax
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'tpope/vim-surround'
+call dein#add('scrooloose/syntastic')
+"call dein#add('SirVer/ultisnips')
+call dein#add('tomtom/tlib_vim')
+call dein#add('MarcWeber/vim-addon-mw-utils')
+"call dein#add('honza/vim-snippets')
+call dein#add('tpope/vim-surround')
 
 " Navigation and usability
-NeoBundle 'ctrlpvim/ctrlp.vim'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'christoomey/vim-tmux-navigator'
-NeoBundle 'terryma/vim-multiple-cursors'
-NeoBundle 'tpope/vim-unimpaired'
-NeoBundle 'chrisbra/NrrwRgn'
-"NeoBundle 'ervandew/supertab'
-NeoBundle 'severin-lemaignan/vim-minimap'
-NeoBundle 'Yggdroot/indentLine'
-NeoBundle 'tpope/vim-eunuch'
-NeoBundle 'will133/vim-dirdiff'
-NeoBundle 'Konfekt/FastFold'
+call dein#add('ctrlpvim/ctrlp.vim')
+call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
+call dein#add('majutsushi/tagbar')
+call dein#add('christoomey/vim-tmux-navigator')
+call dein#add('terryma/vim-multiple-cursors')
+call dein#add('tpope/vim-unimpaired')
+call dein#add('chrisbra/NrrwRgn')
+"call dein#add('ervandew/supertab')
+call dein#add('severin-lemaignan/vim-minimap')
+call dein#add('Yggdroot/indentLine')
+call dein#add('tpope/vim-eunuch')
+call dein#add('will133/vim-dirdiff')
+call dein#add('Konfekt/FastFold')
 if has('nvim')
-  NeoBundle 'Shougo/deoplete.nvim'
-  NeoBundle 'zchee/deoplete-go'
+  call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-go')
 else
-  NeoBundle 'Shougo/neocomplete.vim'
+  call dein#add('Shougo/neocomplete.vim')
 endif
 
-NeoBundle 'jiangmiao/auto-pairs'
-"NeoBundle 'vim-scripts/AutoComplPop'
+call dein#add('jiangmiao/auto-pairs')
+"call dein#add('vim-scripts/AutoComplPop')
 " Colorschemes
-NeoBundle 'morhetz/gruvbox'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'tomasr/molokai'
-NeoBundle 'noahfrederick/vim-hemisu'
-NeoBundle 'jpo/vim-railscasts-theme'
-NeoBundle 'antlypls/vim-colors-codeschool'
-NeoBundle 'gosukiwi/vim-atom-dark/'
-NeoBundle 'vim-scripts/mayansmoke'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'rakr/vim-one'
-NeoBundle 'dracula/vim'
+call dein#add('morhetz/gruvbox')
+call dein#add('altercation/vim-colors-solarized')
+call dein#add('nanotech/jellybeans.vim')
+call dein#add('tomasr/molokai')
+call dein#add('noahfrederick/vim-hemisu')
+call dein#add('jpo/vim-railscasts-theme')
+call dein#add('antlypls/vim-colors-codeschool')
+call dein#add('vim-scripts/mayansmoke')
+call dein#add('w0ng/vim-hybrid')
+call dein#add('rakr/vim-one')
+call dein#add('dracula/vim')
 " Language Support
 " Ruby/Rails
-NeoBundle 'tpope/vim-rake'
-NeoBundle 'tpope/vim-rails'
-NeoBundle 'tpope/vim-bundler'
+call dein#add('tpope/vim-rake')
+call dein#add('tpope/vim-rails')
+call dein#add('tpope/vim-bundler')
 
 " Coffee Script
-NeoBundle 'kchmck/vim-coffee-script'
+call dein#add('kchmck/vim-coffee-script')
 
 "Ember
 "Handlebars
-NeoBundle 'mustache/vim-mustache-handlebars'
-NeoBundle 'chrisgillis/vim-bootstrap3-snippets'
+call dein#add('mustache/vim-mustache-handlebars')
+call dein#add('chrisgillis/vim-bootstrap3-snippets')
 
 " Go Lang
-NeoBundle 'fatih/vim-go'
+call dein#add('fatih/vim-go')
 
 "Quick notes and time tracking
-NeoBundle 'vimwiki/vimwiki'
+call dein#add('vimwiki/vimwiki')
 
 "Angular
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'othree/javascript-libraries-syntax.vim'
-NeoBundle 'matthewsimo/angular-vim-snippets'
-NeoBundle 'claco/jasmine.vim'
-NeoBundle 'burnettk/vim-angular'
+call dein#add('pangloss/vim-javascript')
+call dein#add('othree/javascript-libraries-syntax.vim')
+call dein#add('matthewsimo/angular-vim-snippets')
+call dein#add('claco/jasmine.vim')
+call dein#add('burnettk/vim-angular')
 
 "Jade
-NeoBundle 'digitaltoad/vim-jade'
+call dein#add('digitaltoad/vim-jade')
 
 "Elixir
-NeoBundle 'elixir-lang/vim-elixir'
-NeoBundle 'avdgaag/vim-phoenix'
-NeoBundle 'slashmili/alchemist.vim'
+call dein#add('elixir-lang/vim-elixir')
+call dein#add('avdgaag/vim-phoenix')
+call dein#add('slashmili/alchemist.vim')
 
 "css
-NeoBundle 'genoma/vim-less'
-NeoBundle 'JulesWang/css.vim'
+call dein#add('genoma/vim-less')
+call dein#add('JulesWang/css.vim')
 
 "React
-NeoBundle 'mxw/vim-jsx'
+call dein#add('mxw/vim-jsx')
 
 "IOS
-NeoBundle 'eraserhd/vim-ios'
+call dein#add('eraserhd/vim-ios')
+" Required:
+call dein#end()
 
-call neobundle#end()
+" Required:
+filetype plugin indent on
+syntax enable
 
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+" If you want to install not installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
 
-filetype plugin indent on    " required
-syntax on
 set tabstop=2 shiftwidth=2 expandtab
 "autocmd Filetype html setlocal ts=2 sts=2 sw=2
 "autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
@@ -135,21 +136,11 @@ runtime macros/matchit.vim
 set spell spelllang=en_us
 set nowrap
 
-" Trigger configuration.
-let g:UltiSnipsExpandTrigger="<s-tab>"
-let g:UltiSnipsJumpForwardTrigger="<s-tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-k>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
 " ctrlp
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|bower_components|tmp|deps|_build|rel)|(\.(swp|ico|git|svn))$'
 "Tagbar
 nmap <F12> :TagbarToggle<CR>
 
-"Supertab
-"let g:SuperTabDefaultCompletionType = "context"
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let g:deoplete#enable_at_startup = 1
@@ -199,24 +190,11 @@ endif
 
 inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 
-" airline
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='wombat'
-set guifont=Sauce\ Code\ Powerline:h14
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
-let g:hybrid_custom_term_colors = 1
-let g:jellybeans_use_term_italics = 1
-let g:one_allow_italics = 1 " I love italic for comments
 set background=dark
 if has("gui_macvim")
-  colorscheme jellybeans
+  colorscheme one
 else
-  colorscheme jellybeans
+  colorscheme one
 end
 
 "Jasmine react tests
@@ -246,23 +224,14 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 
-"Folding
-set foldmethod=syntax
-set foldlevelstart=20
-set smartindent
-let g:indent_guides_enable_on_vim_startup = 0
-"Vim Airline
-let g:airline#extensions#tabline#enabled = 1
-set laststatus=2
-set ttimeoutlen=50
-set t_ut=
-set mouse=
-
 let g:syntastic_ruby_checkers          = ['rubocop', 'mri']
 let g:syntastic_ruby_rubocop_exec      = '/usr/local/bin/rubocop'
 let g:syntastic_enable_elixir_checker  = 1
 
-nmap <F2> :grep -R --exclude-dir data --exclude-dir log --exclude-dir .git "
+"Airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='wombat'
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 au ColorScheme * highlight ExtraWhitespace guibg=red
@@ -275,6 +244,11 @@ if !has("nvim")
 endif
 highlight Search ctermbg=LightYellow ctermfg=DarkGray
 set backspace=indent,eol,start
+
+imap <s-tab>     <Plug>(neosnippet_expand_or_jump)
+smap <s-tab>     <Plug>(neosnippet_expand_or_jump)
+xmap <s-tab>     <Plug>(neosnippet_expand_target)
+highlight Pmenu ctermbg=White ctermfg=black
 
 " Custom maps
 nnoremap \ed :!dogma %:p
