@@ -18,7 +18,7 @@ call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 
 " You can specify revision/branch/tag.
-call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+call dein#add('Shougo/vimshell')
 
 call dein#add('tpope/vim-fugitive')
 call dein#add('L9')
@@ -65,6 +65,7 @@ call dein#add('vim-scripts/mayansmoke')
 call dein#add('w0ng/vim-hybrid')
 call dein#add('rakr/vim-one')
 call dein#add('dracula/vim')
+call dein#add('powerman/vim-plugin-AnsiEsc')
 
 " Language Support
 " Ruby/Rails
@@ -159,7 +160,7 @@ set background=dark
 if has("gui_macvim")
   colorscheme hybrid
 else
-  colorscheme hybrid
+  colorscheme dracula
 end
 
 "Jasmine react tests
