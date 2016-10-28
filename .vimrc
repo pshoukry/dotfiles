@@ -214,13 +214,13 @@ nnoremap gn :bn<cr>
 
 " Custom maps
 if has('nvim')
-nnoremap \ed :terminal dogma %:p
-nnoremap \ec :terminal mix credo
-nnoremap \et :terminal docker-compose run --rm web mix test
+  nnoremap \ed :terminal dogma %:p
+  nnoremap \ec :terminal mix credo
+  nnoremap \et :terminal docker-compose run --rm web mix test
 else
-nnoremap \ed :!dogma %:p
-nnoremap \ec :!mix credo
-nnoremap \et :!docker-compose run --rm web mix test
+  nnoremap \ed :!dogma %:p
+  nnoremap \ec :!mix credo
+  nnoremap \et :!docker-compose run --rm web mix test
 endif
 
 autocmd BufWritePre * %s/\s\+$//e
