@@ -157,7 +157,7 @@ inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
 
 set background=dark
 if has("gui_macvim")
-  colorscheme hybid
+  colorscheme hybrid
 else
   colorscheme hybrid
 end
@@ -213,10 +213,18 @@ let g:neosnippet#snippets_directory="~/.vim/Snippets"
 nnoremap gn :bn<cr>
 
 " Custom maps
+if has('nvim')
+nnoremap \ed :terminal dogma %:p
+nnoremap \ec :terminal mix credo
+nnoremap \et :terminal docker-compose run --rm web mix test
+else
 nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo
 nnoremap \et :!docker-compose run --rm web mix test
+endif
 
 autocmd BufWritePre * %s/\s\+$//e
 :inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
 :inoremap \it <C-R>=strftime("%I:%M%p")<CR>
+
+set guifont=Sauce\ Code\ Powerline:h14
