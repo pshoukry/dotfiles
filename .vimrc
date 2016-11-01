@@ -1,4 +1,3 @@
-
 if &compatible
   set nocompatible               " Be iMproved
 endif
@@ -19,6 +18,7 @@ call dein#add('Shougo/neosnippet-snippets')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell')
+call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('tpope/vim-fugitive')
 call dein#add('L9')
@@ -46,6 +46,8 @@ call dein#add('will133/vim-dirdiff')
 call dein#add('Konfekt/FastFold')
 if has('nvim')
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('fishbullet/deoplete-ruby')
+
   call dein#add('zchee/deoplete-go')
 else
   call dein#add('Shougo/neocomplete.vim')
@@ -111,6 +113,9 @@ call dein#add('mxw/vim-jsx')
 
 "IOS
 call dein#add('eraserhd/vim-ios')
+
+"TDD
+call dein#add('janko-m/vim-test')
 " Required:
 call dein#end()
 
@@ -147,6 +152,21 @@ if has('nvim')
   let g:deoplete#enable_smart_case = 1
   let g:deoplete#auto_completion_start_length = 1
   let g:deoplete#sources#syntax#min_keyword_length = 1
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  " Enable heavy omni completion.
+  if !exists('g:deoplete#sources#omni#input_patterns')
+   let g:deoplete#sources#omni#input_patterns = {}
+  endif
+  if !exists('g:deoplete#force_omni_input_patterns')
+   let g:deoplete#force_omni_input_patterns = {}
+  endif
 else
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
@@ -154,13 +174,14 @@ else
   let g:neocomplete#sources#syntax#min_keyword_length = 1
 endif
 
-inoremap <expr><tab> pumvisible() ? "\<C-n>" : "\<C-h>"
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-set background=dark
 if has("gui_macvim")
-  colorscheme hybrid
+  set background=light
+  colorscheme hemisu
 else
-  colorscheme dracula
+  set background=light
+  colorscheme hemisu
 end
 
 "Jasmine react tests
@@ -214,18 +235,21 @@ let g:neosnippet#snippets_directory="~/.vim/Snippets"
 nnoremap gn :bn<cr>
 
 " Custom maps
-if has('nvim')
-  nnoremap \ed :terminal dogma %:p
-  nnoremap \ec :terminal mix credo
-  nnoremap \et :terminal docker-compose run --rm web mix test
-else
-  nnoremap \ed :!dogma %:p
-  nnoremap \ec :!mix credo
-  nnoremap \et :!docker-compose run --rm web mix test
-endif
+nnoremap \ed :!dogma %:p
+nnoremap \ec :!mix credo
+
+"vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+
+let test#elixir#exunit#executable = 'docker-compose run --rm web mix test'
 
 autocmd BufWritePre * %s/\s\+$//e
 :inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
 :inoremap \it <C-R>=strftime("%I:%M%p")<CR>
 
 set guifont=Sauce\ Code\ Powerline:h14
+
