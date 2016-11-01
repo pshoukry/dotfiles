@@ -246,7 +246,7 @@ nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
 let test#elixir#exunit#executable = 'docker-compose run --rm web mix test'
-let test#filename_modifier = ':.:s?.*test/?test/?'
+autocmd FileType elixir let test#filename_modifier = ':.:s?.*test/?test/?'
 
 autocmd BufWritePre * %s/\s\+$//e
 :inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
