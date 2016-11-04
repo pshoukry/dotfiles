@@ -213,6 +213,8 @@ let g:go_fmt_command = "goimports"
 
 let g:syntastic_ruby_checkers          = ['rubocop', 'mri']
 let g:syntastic_enable_elixir_checker  = 1
+let g:elixir_use_markdown_for_docs = 1
+
 
 "Airline
 let g:airline_powerline_fonts = 1
