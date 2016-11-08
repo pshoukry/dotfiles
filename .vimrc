@@ -15,6 +15,7 @@ call dein#add('Shougo/dein.vim')
 " Add or remove your plugins here:
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
+call dein#add('honza/vim-snippets')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell')
@@ -46,8 +47,6 @@ call dein#add('will133/vim-dirdiff')
 call dein#add('Konfekt/FastFold')
 if has('nvim')
   call dein#add('Shougo/deoplete.nvim')
-  call dein#add('fishbullet/deoplete-ruby')
-
   call dein#add('zchee/deoplete-go')
 else
   call dein#add('Shougo/neocomplete.vim')
@@ -74,6 +73,7 @@ call dein#add('powerman/vim-plugin-AnsiEsc')
 call dein#add('tpope/vim-rake')
 call dein#add('tpope/vim-rails')
 call dein#add('tpope/vim-bundler')
+call dein#add('danchoi/ri.vim')
 
 " Coffee Script
 call dein#add('kchmck/vim-coffee-script')
@@ -177,11 +177,11 @@ endif
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 if has("gui_macvim")
-  set background=light
-  colorscheme hemisu
+  set background=dark
+  colorscheme jellybeans
 else
-  set background=light
-  colorscheme hemisu
+  set background=dark
+  colorscheme jellybeans
 end
 
 "Jasmine react tests
@@ -256,3 +256,4 @@ autocmd BufWritePre * %s/\s\+$//e
 
 set guifont=Sauce\ Code\ Powerline:h14
 
+let g:neosnippet#snippets_directory='~/.vim/repos/github.com/honza/vim-snippets/snippets'
