@@ -45,6 +45,8 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('tpope/vim-eunuch')
 call dein#add('will133/vim-dirdiff')
 call dein#add('Konfekt/FastFold')
+call dein#add('scrooloose/nerdtree')
+call dein#add('Xuyuanp/nerdtree-git-plugin')
 if has('nvim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-go')
@@ -145,7 +147,7 @@ set nowrap
 let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|bower_components|tmp|deps|_build|rel)|(\.(swp|ico|git|svn))$'
 let g:ctrlp_map = 'f'
 "Tagbar
-nmap <F12> :TagbarToggle<CR>
+nmap \tb :TagbarToggle<CR>
 
 if has('nvim')
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -160,6 +162,9 @@ if has('nvim')
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
   " Enable heavy omni completion.
   if !exists('g:deoplete#sources#omni#input_patterns')
@@ -244,9 +249,14 @@ nnoremap \ec :!mix credo
 "vim-test
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
+if has('nvim')
+nmap <silent> <leader>a :terminal docker-compose run --rm web mix test<CR>
+else
+nmap <silent> <leader>a :!docker-compose run --rm web mix test<CR>
+endif
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+nmap <silent> <leader>ir :!ruby %<CR>
 
 let test#elixir#exunit#executable = 'docker-compose run --rm web mix test'
 autocmd FileType elixir let test#filename_modifier = ':.:s?.*test/?test/?'
