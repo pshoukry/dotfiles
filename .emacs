@@ -1,5 +1,6 @@
 (require 'package)
 
+;;; Code:
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
@@ -14,7 +15,7 @@ Return a list of installed packages or nil for every skipped package."
    (lambda (package)
      (if (package-installed-p package)
 	 nil
-       (if (y-or-n-p (format "Package %s is missing. Install it? " package))
+       (if (y-or-n-p (format "Package %s is missing.Install it? " package))
 	   (package-install package)
 	 package)))
    packages))
@@ -27,7 +28,7 @@ Return a list of installed packages or nil for every skipped package."
 (package-initialize)
 
 ;; Assuming you wish to install "iedit" and "magit"
-(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package 'minitest 'slim-mode 'ujelly-theme 'dracula-theme 'haml-mode 'yaml-mode 'coffee-mode 'rubocop 'jbeans-theme 'evil-matchit 'whitespace 'synonyms)
+(ensure-package-installed 'iedit 'magit 'helm 'evil 'flycheck 'alchemist 'yasnippet 'powerline 'ctags 'git-gutter 'robe 'dockerfile-mode 'ample-theme 'evil-mc 'fancy-battery 'markdown-mode 'indent-guide 'minimap 'sr-speedbar 'projectile 'helm-projectile 'use-package 'minitest 'slim-mode 'ujelly-theme 'dracula-theme 'haml-mode 'yaml-mode 'coffee-mode 'rubocop 'jbeans-theme 'evil-matchit 'whitespace 'synonyms 'zenburn-theme)
 
 (require 'whitespace)
 (require 'evil-matchit)
@@ -107,7 +108,7 @@ Return a list of installed packages or nil for every skipped package."
 (defvar company-mode/enable-yas t "Enable yasnippet for all backends.")
 
 (defun company-mode/backend-with-yas (backend)
-  (if (or (not company-mode/enable-yas) (and (listp backend)    (member 'company-yasnippet backend)))
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
       backend
     (append (if (consp backend) backend (list backend))
 	    '(:with company-yasnippet))))
@@ -194,7 +195,7 @@ Return a list of installed packages or nil for every skipped package."
  '(coffee-tab-width 2)
  '(custom-safe-themes
    (quote
-    ("be4025b1954e4ac2a6d584ccfa7141334ddd78423399447b96b6fa582f206194" "45712b65018922c9173439d9b1b193cb406f725f14d02c8c33e0d2cdad844613" "345f8f92edc3508574c61850b98a2e0a7a3f5ba3bb9ed03a50f6e41546fe2de0" "d1abda58eedee72fbe28bbb7a5ff1953e1b7d2fa80913bcea9cb3cf12cf751f4" "f9805a89d4309ca29b68c4a6b3d8f13f7931603e59b881515a27535d6ffa1a6e" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" default)))
+    ("4ab95b35f7720043592b49d890003874aa1954a3cf299edde13657c6a9182d85" "4e753673a37c71b07e3026be75dc6af3efbac5ce335f3707b7d6a110ecb636a3" "be4025b1954e4ac2a6d584ccfa7141334ddd78423399447b96b6fa582f206194" "45712b65018922c9173439d9b1b193cb406f725f14d02c8c33e0d2cdad844613" "345f8f92edc3508574c61850b98a2e0a7a3f5ba3bb9ed03a50f6e41546fe2de0" "d1abda58eedee72fbe28bbb7a5ff1953e1b7d2fa80913bcea9cb3cf12cf751f4" "f9805a89d4309ca29b68c4a6b3d8f13f7931603e59b881515a27535d6ffa1a6e" "12b4427ae6e0eef8b870b450e59e75122d5080016a9061c9696959e50d578057" "ad950f1b1bf65682e390f3547d479fd35d8c66cafa2b8aa28179d78122faa947" "40f6a7af0dfad67c0d4df2a1dd86175436d79fc69ea61614d668a635c2cd94ab" "4f5bb895d88b6fe6a983e63429f154b8d939b4a8c581956493783b2515e22d6d" default)))
  '(git-gutter:added-sign "+")
  '(git-gutter:deleted-sign "-")
  '(git-gutter:modified-sign "~")
@@ -203,7 +204,7 @@ Return a list of installed packages or nil for every skipped package."
     ("~/org/daily.org" "~/org/unsorted.org" "~/org/projects.org")))
  '(package-selected-packages
    (quote
-    (synonyms evil-matchit jbeans-theme rubocop coffee-mode yaml-mode haml-mode dracula-theme ujelly-theme slim-mode minitest use-package helm-projectile projectile sr-speedbar minimap indent-guide markdown-mode fancy-battery evil-mc ample-theme dockerfile-mode robe git-gutter ctags powerline yasnippet alchemist flycheck evil helm magit iedit))))
+    (xpm synonyms evil-matchit jbeans-theme rubocop coffee-mode yaml-mode haml-mode dracula-theme ujelly-theme slim-mode minitest use-package helm-projectile projectile sr-speedbar minimap indent-guide markdown-mode fancy-battery evil-mc ample-theme dockerfile-mode robe git-gutter ctags powerline yasnippet alchemist flycheck evil helm magit iedit))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -213,7 +214,7 @@ Return a list of installed packages or nil for every skipped package."
 
 (if (display-graphic-p) 
     (load-theme 'jbeans) 
-  (load-theme 'ample-flat))
+  (load-theme 'jbeans))
 
 (display-time-mode t)
 (fancy-battery-mode t)
@@ -294,8 +295,6 @@ Return a list of installed packages or nil for every skipped package."
 	  (lambda ()
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-(add-to-list 'default-frame-alist '(height . 40))
-(add-to-list 'default-frame-alist '(width . 175))
 ;; coffeescript
 
 
@@ -306,4 +305,4 @@ Return a list of installed packages or nil for every skipped package."
 
 (add-hook 'ruby-mode-hook 'rubocop-mode)
 (setq-default cursor-type '(bar . 1))
-(set-face-attribute 'default nil :height 120)
+(set-face-attribute 'default nil :height 140)

@@ -4,7 +4,6 @@ endif
 
 " Required:
 set runtimepath+=~/.vim/repos/github.com/Shougo/dein.vim
-
 " Required:
 call dein#begin('~/.vim')
 
@@ -49,6 +48,9 @@ call dein#add('scrooloose/nerdtree')
 call dein#add('Xuyuanp/nerdtree-git-plugin')
 if has('nvim')
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('landaire/deoplete-swift')
+  call dein#add('mitsuse/autocomplete-swift')
+  call dein#add('zchee/deoplete-clang')
   call dein#add('zchee/deoplete-go')
 else
   call dein#add('Shougo/neocomplete.vim')
@@ -113,6 +115,8 @@ call dein#add('JulesWang/css.vim')
 
 "React
 call dein#add('mxw/vim-jsx')
+call dein#add('claco/jasmine.vim')
+call dein#add('flowtype/vim-flow')
 
 "IOS
 call dein#add('eraserhd/vim-ios')
@@ -192,11 +196,9 @@ end
 
 "Jasmine react tests
 au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
-autocmd FileType jasmine.javascript UltiSnipsAddFiletypes javascript-jasmine
 
 "Stylus
 au BufRead,BufNewFile *.styl set filetype=css syntax=css omnifunc=syntaxcomplete#Complete
-autocmd FileType css UltiSnipsAddFiletypes css
 
 "Better ruby omnicomplete
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -245,6 +247,7 @@ nnoremap gn :bn<cr>
 " Custom maps
 nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo
+nnoremap \d :ExDoc
 
 "vim-test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -260,10 +263,9 @@ nmap <silent> <leader>ir :!ruby %<CR>
 
 let test#elixir#exunit#executable = 'docker-compose run --rm web mix test'
 autocmd FileType elixir let test#filename_modifier = ':.:s?.*test/?test/?'
-
 autocmd BufWritePre * %s/\s\+$//e
-:inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
-:inoremap \it <C-R>=strftime("%I:%M%p")<CR>
+inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
+inoremap \it <C-R>=strftime("%I:%M%p")<CR>
 
 set guifont=Sauce\ Code\ Powerline:h14
 
@@ -323,3 +325,6 @@ let g:tagbar_type_objc = {
         \ 'enumeration'    : 'e'
     \ }
     \ }
+
+let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.9.0/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/clang'
