@@ -52,6 +52,7 @@ if has('nvim')
   call dein#add('mitsuse/autocomplete-swift')
   call dein#add('zchee/deoplete-clang')
   call dein#add('zchee/deoplete-go')
+  call dein#add('zchee/deoplete-jedi')
 else
   call dein#add('Shougo/neocomplete.vim')
 endif
@@ -123,6 +124,7 @@ call dein#add('eraserhd/vim-ios')
 
 "TDD
 call dein#add('janko-m/vim-test')
+call dein#add('blindFS/vim-taskwarrior')
 " Required:
 call dein#end()
 
@@ -148,8 +150,9 @@ set spell spelllang=en_us
 set nowrap
 
 " ctrlp
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|bower_components|tmp|deps|_build|rel)|(\.(swp|ico|git|svn))$'
+let g:ctrlp_custom_ignore = '\v[\/](maildir|node_modules|target|dist|bower_components|tmp|deps|_build|rel)|(\.(swp|ico|git|svn))$'
 let g:ctrlp_map = 'f'
+let g:ctrlp_working_path_mode = '0'
 "Tagbar
 nmap \tb :TagbarToggle<CR>
 
