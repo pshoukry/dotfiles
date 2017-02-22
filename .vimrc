@@ -192,11 +192,7 @@ if has('nvim')
 else
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 1
-
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
+  let g:neocomplete#sources#syntax#min_keyword_length = 3
 endif
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -239,11 +235,7 @@ let g:elixir_use_markdown_for_docs = 1
 
 
 "Airline
-if has("nvim")
 let g:airline_powerline_fonts = 1
-else
-let g:airline_powerline_fonts = 0
-endif
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='wombat'
 
@@ -280,7 +272,7 @@ autocmd BufWritePre * %s/\s\+$//e
 inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
 inoremap \it <C-R>=strftime("%I:%M%p")<CR>
 
-set guifont=Menlo\ Regular:h14
+set guifont=Sauce\ Code\ Powerline:h14
 
 let g:neosnippet#snippets_directory='~/.vim/repos/github.com/honza/vim-snippets/snippets'
 
@@ -344,3 +336,4 @@ let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/c
 
 let g:syntastic_javascript_checkers = ['eslint']
 
+set clipboard=unnamed
