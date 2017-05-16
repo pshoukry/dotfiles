@@ -24,7 +24,7 @@ call dein#add('Shougo/vimshell')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('tpope/vim-fugitive')
-call dein#add('L9')
+call dein#add('vim-scripts/L9')
 call dein#add('airblade/vim-gitgutter')
 
 " Syntax
@@ -34,7 +34,11 @@ call dein#add('MarcWeber/vim-addon-mw-utils')
 call dein#add('tpope/vim-surround')
 
 " Navigation and usability
-call dein#add('ctrlpvim/ctrlp.vim')
+if has('nvim')
+  call dein#add('Shougo/denite.nvim')
+else
+  call dein#add('ctrlpvim/ctrlp.vim')
+end
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('majutsushi/tagbar')
@@ -82,7 +86,6 @@ call dein#add('powerman/vim-plugin-AnsiEsc')
 call dein#add('tpope/vim-rake')
 call dein#add('tpope/vim-rails')
 call dein#add('tpope/vim-bundler')
-call dein#add('danchoi/ri.vim')
 
 "Python
 call dein#add('python-mode/python-mode')
@@ -192,17 +195,17 @@ if has('nvim')
 else
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
-  let g:neocomplete#sources#syntax#min_keyword_length = 3
+  let g:neocomplete#sources#syntax#min_keyword_length = 1
 endif
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 if has("gui_macvim")
-  set background=dark
-  colorscheme hybrid
+  "set background=dark
+  colorscheme hemisu
 else
-  set background=dark
-  colorscheme hybrid
+  "set background=dark
+  colorscheme hemisu
 end
 
 "Jasmine react tests
@@ -338,3 +341,22 @@ let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/c
 let g:syntastic_javascript_checkers = ['eslint']
 
 set clipboard=unnamed
+
+" Denite settings
+" Denite custom highlights
+highlight default link deniteMatchedChar CursorLine
+highlight default link deniteMatchedRange None
+
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', [])
+call denite#custom#var('grep', 'final_opts', [])
+call denite#custom#var('grep', 'default_opts',
+\ ['--follow', '--nocolor', '--nogroup', '--smart-case', '--hidden'])
+
+" Denite custom mappings
+call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
+
+nnoremap f :<C-u>Denite -auto-preview file_rec<cr>
+nnoremap <leader>s :<C-u>Denite grep<cr>
