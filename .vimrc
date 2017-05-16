@@ -355,8 +355,8 @@ call denite#custom#var('grep', 'default_opts',
 \ ['--follow', '--nocolor', '--nogroup', '--smart-case', '--hidden'])
 
 " Denite custom mappings
-call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
-nnoremap f :<C-u>Denite -auto-preview file_rec<cr>
+nnoremap f :<C-u>Denite file_rec<cr>
 nnoremap <leader>s :<C-u>Denite grep<cr>
