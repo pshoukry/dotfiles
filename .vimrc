@@ -24,6 +24,7 @@ call dein#add('Shougo/vimshell')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-dispatch')
 call dein#add('vim-scripts/L9')
 call dein#add('airblade/vim-gitgutter')
 
@@ -61,6 +62,7 @@ if has('nvim')
   call dein#add('zchee/deoplete-go')
   call dein#add('zchee/deoplete-jedi')
   call dein#add('fishbullet/deoplete-ruby')
+  call dein#add('alexgenco/neovim-ruby')
 else
   call dein#add('Shougo/neocomplete.vim')
 endif
@@ -190,7 +192,12 @@ if has('nvim')
     let g:deoplete#sources#omni#input_patterns = {}
   endif
   if !exists('g:deoplete#force_omni_input_patterns')
-    let g:deoplete#force_omni_input_patterns = {}
+		let g:deoplete#omni#input_patterns = {}
+ 		let g:deoplete#omni#input_patterns.ruby =
+		\ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
+
+    let g:deoplete#omni#functions = {}
+		let g:deoplete#omni#functions.ruby = 'rubycomplete#Complete'
   endif
 else
   let g:neocomplete#enable_at_startup = 1
@@ -201,11 +208,11 @@ endif
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 if has("gui_macvim")
-  "set background=dark
-  colorscheme hemisu
+  set background=dark
+  colorscheme hybrid
 else
-  "set background=dark
-  colorscheme hemisu
+  set background=dark
+  colorscheme hybrid
 end
 
 "Jasmine react tests
@@ -341,22 +348,27 @@ let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/c
 let g:syntastic_javascript_checkers = ['eslint']
 
 set clipboard=unnamed
+if has('nvim')
+  " Denite settings
+  " Denite custom highlights
+  highlight default link deniteMatchedChar CursorLine
+  highlight default link deniteMatchedRange None
 
-" Denite settings
-" Denite custom highlights
-highlight default link deniteMatchedChar CursorLine
-highlight default link deniteMatchedRange None
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', [])
+  call denite#custom#var('grep', 'final_opts', [])
+  call denite#custom#var('grep', 'default_opts',
+  \ ['--follow', '--nocolor', '--nogroup', '--smart-case', '--hidden'])
 
-call denite#custom#var('grep', 'recursive_opts', [])
-call denite#custom#var('grep', 'pattern_opt', [])
-call denite#custom#var('grep', 'separator', [])
-call denite#custom#var('grep', 'final_opts', [])
-call denite#custom#var('grep', 'default_opts',
-\ ['--follow', '--nocolor', '--nogroup', '--smart-case', '--hidden'])
+  " Denite custom mappings
+  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
 
-" Denite custom mappings
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+  nnoremap f :<C-u>Denite file_rec<cr>
+  nnoremap <leader>s :<C-u>Denite grep<cr>
+end
 
-nnoremap f :<C-u>Denite file_rec<cr>
-nnoremap <leader>s :<C-u>Denite grep<cr>
+" Folding
+set foldmethod=syntax
+let &colorcolumn=join(range(81,999),",")
