@@ -150,9 +150,6 @@ if dein#check_install()
 endif
 
 set tabstop=2 shiftwidth=2 expandtab
-"autocmd Filetype html setlocal ts=2 sts=2 sw=2
-"autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-"autocmd Filetype javascript setlocal ts=4 sts=4 sw=4
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype go setlocal ts=4 sts=4 sw=4 noexpandtab
 
@@ -192,12 +189,12 @@ if has('nvim')
     let g:deoplete#sources#omni#input_patterns = {}
   endif
   if !exists('g:deoplete#force_omni_input_patterns')
-		let g:deoplete#omni#input_patterns = {}
- 		let g:deoplete#omni#input_patterns.ruby =
-		\ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
+    let g:deoplete#omni#input_patterns = {}
+    let g:deoplete#omni#input_patterns.ruby =
+          \ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
 
     let g:deoplete#omni#functions = {}
-		let g:deoplete#omni#functions.ruby = 'rubycomplete#Complete'
+    let g:deoplete#omni#functions.ruby = 'rubycomplete#Complete'
   endif
 else
   let g:neocomplete#enable_at_startup = 1
@@ -347,7 +344,9 @@ let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/c
 
 let g:syntastic_javascript_checkers = ['eslint']
 
+" Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
+
 if has('nvim')
   " Denite settings
   " Denite custom highlights
@@ -359,7 +358,7 @@ if has('nvim')
   call denite#custom#var('grep', 'separator', [])
   call denite#custom#var('grep', 'final_opts', [])
   call denite#custom#var('grep', 'default_opts',
-  \ ['--follow', '--nocolor', '--nogroup', '--smart-case', '--hidden'])
+        \ ['--follow', '--nocolor', '--nogroup', '--smart-case', '--hidden'])
 
   " Denite custom mappings
   call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
