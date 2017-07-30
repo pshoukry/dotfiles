@@ -370,4 +370,6 @@ end
 
 " Folding
 set foldmethod=syntax
+set foldlevel=2
+
 let &colorcolumn=join(range(81,999),",")
