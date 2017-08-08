@@ -353,6 +353,16 @@ if has('nvim')
   highlight default link deniteMatchedChar CursorLine
   highlight default link deniteMatchedRange None
 
+  call denite#custom#source(
+        \ 'file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
+  call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+        \ [
+        \ '.git/', '.ropeproject/', '__pycache__/',
+        \ 'venv/',
+        \ 'images/',
+        \ '*.min.*',
+        \ 'img/', 'fonts/',
+        \ '_build/', 'deps/', 'doc/'])
   call denite#custom#var('grep', 'recursive_opts', [])
   call denite#custom#var('grep', 'pattern_opt', [])
   call denite#custom#var('grep', 'separator', [])
