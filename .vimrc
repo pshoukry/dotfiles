@@ -134,6 +134,10 @@ call dein#add('claco/jasmine.vim')
 "IOS
 call dein#add('eraserhd/vim-ios')
 
+"Vue
+call dein#add('othree/html5.vim')
+call dein#add('posva/vim-vue')
+
 "TDD
 call dein#add('janko-m/vim-test')
 call dein#add('blindFS/vim-taskwarrior')
@@ -167,7 +171,7 @@ let g:ctrlp_working_path_mode = '0'
 let g:ctrlp_show_hidden = 1
 
 "Tagbar
-nmap \tb :TagbarToggle<CR>
+nmap <F9> :TagbarToggle<CR>
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -265,7 +269,7 @@ nnoremap gn :bn<cr>
 nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo %:p
 nnoremap \d :ExDoc
-nnoremap \nt :NERDTreeToggle <CR>
+nnoremap <F8> :NERDTreeToggle <CR>
 
 "vim-test
 nmap <silent> <leader>t :TestNearest<CR>
