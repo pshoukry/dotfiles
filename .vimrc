@@ -270,12 +270,14 @@ nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo %:p
 nnoremap \d :ExDoc
 nnoremap <F8> :NERDTreeToggle <CR>
+nnoremap <F7> :Start
 
 "vim-test
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+nmap <silent> <leader>a :Dispatch mix test<CR>
 nmap <silent> <leader>ir :!ruby %<CR>
 
 autocmd FileType elixir let test#filename_modifier = ':.:s?.*test/?test/?'
@@ -366,7 +368,8 @@ if has('nvim')
         \ 'images/',
         \ '*.min.*',
         \ 'img/', 'fonts/',
-        \ '_build/', 'deps/', 'doc/'])
+        \ '_build/', 'deps/', 'doc/',
+        \ 'node_modules/'])
   call denite#custom#var('grep', 'recursive_opts', [])
   call denite#custom#var('grep', 'pattern_opt', [])
   call denite#custom#var('grep', 'separator', [])
@@ -387,3 +390,4 @@ set foldmethod=syntax
 set foldlevel=2
 
 let &colorcolumn=join(range(81,999),",")
+set termguicolors
