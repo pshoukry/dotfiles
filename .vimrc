@@ -258,9 +258,9 @@ au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
 set backspace=indent,eol,start
 "Neo Snippets
-imap <s-tab>     <Plug>(neosnippet_expand_or_jump)
-smap <s-tab>     <Plug>(neosnippet_expand_or_jump)
-xmap <s-tab>     <Plug>(neosnippet_expand_target)
+imap <tab>     <Plug>(neosnippet_expand_or_jump)
+smap <tab>     <Plug>(neosnippet_expand_or_jump)
+xmap <tab>     <Plug>(neosnippet_expand_target)
 let g:neosnippet#snippets_directory="~/.vim/Snippets"
 
 nnoremap gn :bn<cr>
@@ -277,7 +277,7 @@ nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
-nmap <silent> <leader>a :Dispatch mix test<CR>
+nmap <silent> <leader>a :Start mix test<CR>
 nmap <silent> <leader>ir :!ruby %<CR>
 
 autocmd FileType elixir let test#filename_modifier = ':.:s?.*test/?test/?'
@@ -348,7 +348,7 @@ let g:tagbar_type_objc = {
 let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.9.0/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/clang'
 
-let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_checkers = ['eslint', "flow"]
 
 " Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
@@ -391,3 +391,4 @@ set foldlevel=2
 
 let &colorcolumn=join(range(81,999),",")
 set termguicolors
+
