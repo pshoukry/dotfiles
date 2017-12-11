@@ -34,12 +34,7 @@ call dein#add('tomtom/tlib_vim')
 call dein#add('MarcWeber/vim-addon-mw-utils')
 call dein#add('tpope/vim-surround')
 
-" Navigation and usability
-if has('nvim')
-  call dein#add('Shougo/denite.nvim')
-else
-  call dein#add('ctrlpvim/ctrlp.vim')
-end
+call dein#add('ctrlpvim/ctrlp.vim')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-airline/vim-airline-themes')
 call dein#add('majutsushi/tagbar')
@@ -82,6 +77,7 @@ call dein#add('w0ng/vim-hybrid')
 call dein#add('rakr/vim-one')
 call dein#add('dracula/vim')
 call dein#add('powerman/vim-plugin-AnsiEsc')
+call dein#add('rakr/vim-one')
 
 " Language Support
 " Ruby/Rails
@@ -140,7 +136,6 @@ call dein#add('posva/vim-vue')
 
 "TDD
 call dein#add('janko-m/vim-test')
-call dein#add('blindFS/vim-taskwarrior')
 " Required:
 call dein#end()
 
@@ -206,14 +201,12 @@ else
   let g:neocomplete#sources#syntax#min_keyword_length = 1
 endif
 
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
 if has("gui_macvim")
   set background=dark
   colorscheme hybrid
 else
-  set background=dark
-  colorscheme hybrid
+  set background=light
+  colorscheme one
 end
 
 "Jasmine react tests
@@ -246,7 +239,7 @@ let g:elixir_use_markdown_for_docs = 1
 
 
 "Airline
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='wombat'
 
@@ -257,10 +250,21 @@ au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
 set backspace=indent,eol,start
-"Neo Snippets
-imap <tab>     <Plug>(neosnippet_expand_or_jump)
-smap <tab>     <Plug>(neosnippet_expand_or_jump)
-xmap <tab>     <Plug>(neosnippet_expand_target)
+function! s:neosnippet_complete()
+  if pumvisible()
+    if neosnippet#expandable_or_jumpable()
+      return "\<Plug>(neosnippet_expand_or_jump)"
+    endif
+    return "\<c-n>"
+  else
+    if neosnippet#expandable_or_jumpable()
+      return "\<Plug>(neosnippet_expand_or_jump)"
+    endif
+    return "\<tab>"
+  endif
+endfunction
+
+imap <expr><TAB> <SID>neosnippet_complete()
 let g:neosnippet#snippets_directory="~/.vim/Snippets"
 
 nnoremap gn :bn<cr>
@@ -270,6 +274,7 @@ nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo %:p
 nnoremap \d :ExDoc
 nnoremap <F8> :NERDTreeToggle <CR>
+nnoremap <F6> :Dispatch
 nnoremap <F7> :Start
 
 "vim-test
@@ -352,42 +357,6 @@ let g:syntastic_javascript_checkers = ['eslint', "flow"]
 
 " Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
-
-if has('nvim')
-  " Denite settings
-  " Denite custom highlights
-  highlight default link deniteMatchedChar CursorLine
-  highlight default link deniteMatchedRange None
-
-  call denite#custom#source(
-        \ 'file_rec', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
-  call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
-        \ [
-        \ '.git/', '.ropeproject/', '__pycache__/',
-        \ 'venv/',
-        \ 'images/',
-        \ '*.min.*',
-        \ 'img/', 'fonts/',
-        \ '_build/', 'deps/', 'doc/',
-        \ 'node_modules/'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'separator', [])
-  call denite#custom#var('grep', 'final_opts', [])
-  call denite#custom#var('grep', 'default_opts',
-        \ ['--follow', '--nocolor', '--nogroup', '--smart-case', '--hidden'])
-
-  " Denite custom mappings
-  call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-  call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-
-  nnoremap f :<C-u>Denite file_rec<cr>
-  nnoremap <leader>s :<C-u>Denite grep<cr>
-end
-
-" Folding
-set foldmethod=syntax
-set foldlevel=1
 
 let &colorcolumn=join(range(81,999),",")
 set termguicolors
