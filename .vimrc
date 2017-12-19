@@ -66,7 +66,7 @@ call dein#add('jiangmiao/auto-pairs')
 
 " Colorschemes
 call dein#add('morhetz/gruvbox')
-call dein#add('altercation/vim-colors-solarized')
+call dein#add('icymind/NeoSolarized')
 call dein#add('nanotech/jellybeans.vim')
 call dein#add('tomasr/molokai')
 call dein#add('noahfrederick/vim-hemisu')
@@ -78,6 +78,8 @@ call dein#add('rakr/vim-one')
 call dein#add('dracula/vim')
 call dein#add('powerman/vim-plugin-AnsiEsc')
 call dein#add('rakr/vim-one')
+call dein#add('NLKNguyen/papercolor-theme')
+call dein#add('vim-scripts/pyte')
 
 " Language Support
 " Ruby/Rails
@@ -198,15 +200,19 @@ if has('nvim')
 else
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
+  let g:neocomplete#auto_completion_start_length = 1
   let g:neocomplete#sources#syntax#min_keyword_length = 1
+  let g:neocomplete#omni#input_patterns.ruby =
+        \ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
 endif
 
 if has("gui_macvim")
-  set background=dark
-  colorscheme hybrid
-else
   set background=light
-  colorscheme one
+  colorscheme Papercolor
+else
+  set termguicolors
+  set background=light
+  colorscheme Papercolor
 end
 
 "Jasmine react tests
@@ -290,7 +296,7 @@ autocmd BufWritePre * %s/\s\+$//e
 inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
 inoremap \it <C-R>=strftime("%I:%M%p")<CR>
 
-set guifont=Sauce\ Code\ Powerline:h14
+set guifont=Monaco:h12
 
 let g:neosnippet#snippets_directory='~/.vim/repos/github.com/honza/vim-snippets/snippets'
 
@@ -359,5 +365,5 @@ let g:syntastic_javascript_checkers = ['eslint', "flow"]
 set clipboard=unnamed
 
 let &colorcolumn=join(range(81,999),",")
-set termguicolors
+let NERDTreeQuitOnOpen=1
 
