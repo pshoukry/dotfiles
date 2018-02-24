@@ -350,11 +350,5 @@ set clipboard=unnamed
 let &colorcolumn=join(range(81,999),",")
 let NERDTreeQuitOnOpen=1
 
-function! RubyMethodFold(line)
-  let line_is_method_or_end = synIDattr(synID(a:line,1,0), 'name') == 'rubyMethodBlock'
-  let line_is_def = getline(a:line) =~ '\s*def '
-  return line_is_method_or_end || line_is_def
-endfunction
-
-set foldexpr=RubyMethodFold(v:lnum)
-set foldmethod=expr
+set foldmethod=syntax
+set foldlevel=2
