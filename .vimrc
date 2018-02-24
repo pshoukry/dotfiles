@@ -17,7 +17,6 @@ call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Shougo/echodoc.vim')
-call dein#add('honza/vim-snippets')
 
 " You can specify revision/branch/tag.
 call dein#add('Shougo/vimshell')
@@ -185,34 +184,20 @@ if has('nvim')
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#enable_smart_case = 1
   let g:deoplete#auto_completion_start_length = 1
-  " Enable heavy omni completion.
-  if !exists('g:deoplete#sources#omni#input_patterns')
-    let g:deoplete#sources#omni#input_patterns = {}
-  endif
-  if !exists('g:deoplete#force_omni_input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-    let g:deoplete#omni#input_patterns.ruby =
-          \ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
-
-    let g:deoplete#omni#functions = {}
-    let g:deoplete#omni#functions.ruby = 'rubycomplete#Complete'
-  endif
 else
   let g:neocomplete#enable_at_startup = 1
   let g:neocomplete#enable_smart_case = 1
   let g:neocomplete#auto_completion_start_length = 1
   let g:neocomplete#sources#syntax#min_keyword_length = 1
-  let g:neocomplete#omni#input_patterns.ruby =
-        \ ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::']
 endif
 
 if has("gui_macvim")
-  set background=light
-  colorscheme Papercolor
+  set background=dark
+  colorscheme hybrid
 else
   set termguicolors
-  set background=light
-  colorscheme Papercolor
+  set background=dark
+  colorscheme hybrid
 end
 
 "Jasmine react tests
@@ -296,9 +281,7 @@ autocmd BufWritePre * %s/\s\+$//e
 inoremap \id <C-R>=strftime("%a %d-%b-%Y")<CR>
 inoremap \it <C-R>=strftime("%I:%M%p")<CR>
 
-set guifont=Monaco:h12
-
-let g:neosnippet#snippets_directory='~/.vim/repos/github.com/honza/vim-snippets/snippets'
+set guifont=Monaco:h14
 
 "Tagbar
 " Elixir
@@ -367,3 +350,11 @@ set clipboard=unnamed
 let &colorcolumn=join(range(81,999),",")
 let NERDTreeQuitOnOpen=1
 
+function! RubyMethodFold(line)
+  let line_is_method_or_end = synIDattr(synID(a:line,1,0), 'name') == 'rubyMethodBlock'
+  let line_is_def = getline(a:line) =~ '\s*def '
+  return line_is_method_or_end || line_is_def
+endfunction
+
+set foldexpr=RubyMethodFold(v:lnum)
+set foldmethod=expr
