@@ -79,6 +79,7 @@ call dein#add('powerman/vim-plugin-AnsiEsc')
 call dein#add('rakr/vim-one')
 call dein#add('NLKNguyen/papercolor-theme')
 call dein#add('vim-scripts/pyte')
+call dein#add('mtth/scratch.vim')
 
 " Language Support
 " Ruby/Rails
@@ -162,8 +163,7 @@ set nowrap
 
 " ctrlp
 let g:ctrlp_custom_ignore = '\v[\/](maildir|node_modules|target|dist|bower_components|tmp|deps|_build|rel)|(\.(swp|ico|git|svn))$'
-let g:ctrlp_map = 'f'
-let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_show_hidden = 1
 
 "Tagbar
@@ -192,12 +192,12 @@ else
 endif
 
 if has("gui_macvim")
-  set background=dark
-  colorscheme hybrid
+  set background=light
+  colorscheme one
 else
   set termguicolors
-  set background=dark
-  colorscheme hybrid
+  set background=light
+  colorscheme one
 end
 
 "Jasmine react tests
@@ -342,7 +342,8 @@ let g:tagbar_type_objc = {
 let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.9.0/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/clang'
 
-let g:syntastic_javascript_checkers = ['eslint', "flow"]
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'yarn run eslint --'
 
 " Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
@@ -352,3 +353,5 @@ let NERDTreeQuitOnOpen=1
 
 set foldmethod=syntax
 set foldlevel=2
+set autochdir
+let g:NERDTreeChDirMode = 2
