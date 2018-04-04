@@ -343,7 +343,7 @@ let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.9.0/lib/l
 let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/clang'
 
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'yarn run eslint --'
+let g:syntastic_javascript_eslint_exe = 'yarn run eslint'
 
 " Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
@@ -353,5 +353,7 @@ let NERDTreeQuitOnOpen=1
 
 set foldmethod=syntax
 set foldlevel=2
-set autochdir
 let g:NERDTreeChDirMode = 2
+autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
+
