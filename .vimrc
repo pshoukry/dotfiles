@@ -167,7 +167,7 @@ let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_show_hidden = 1
 
 "Tagbar
-nmap <F9> :TagbarToggle<CR>
+nmap <F6> :TagbarToggle<CR>
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -264,8 +264,8 @@ nnoremap gn :bn<cr>
 nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo %:p
 nnoremap \d :ExDoc
-nnoremap <F8> :NERDTreeToggle <CR>
-nnoremap <F6> :Dispatch
+nnoremap <F8> :NERDTreeFind <CR>
+nnoremap <F9> :Dispatch<CR>
 nnoremap <F7> :Start
 
 "vim-test
@@ -353,7 +353,6 @@ let NERDTreeQuitOnOpen=1
 
 set foldmethod=syntax
 set foldlevel=2
-let g:NERDTreeChDirMode = 2
 autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
 autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 
