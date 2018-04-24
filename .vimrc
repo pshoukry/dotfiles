@@ -12,6 +12,7 @@ call dein#begin('~/.vim')
 " Let dein manage dein
 " Required:
 call dein#add('Shougo/dein.vim')
+"call dein#add('rcodetools/rcodetools/blob/master/misc/rcodetools.vim')
 
 " Add or remove your plugins here:
 call dein#add('Shougo/neosnippet.vim')
@@ -57,6 +58,7 @@ if has('nvim')
   call dein#add('zchee/deoplete-jedi')
   call dein#add('fishbullet/deoplete-ruby')
   call dein#add('alexgenco/neovim-ruby')
+  call dein#add('steelsojka/deoplete-flow')
 else
   call dein#add('Shougo/neocomplete.vim')
 endif
@@ -303,42 +305,6 @@ let g:tagbar_type_elixir = {
       \ ]
       \ }
 
-"Objective-c
-" add a definition for Objective-C to tagbar
-let g:tagbar_type_objc = {
-      \ 'ctagstype' : 'ObjectiveC',
-      \ 'kinds'     : [
-      \ 'i:interface',
-      \ 'I:implementation',
-      \ 'p:Protocol',
-      \ 'm:Object_method',
-      \ 'c:Class_method',
-      \ 'v:Global_variable',
-      \ 'F:Object field',
-      \ 'f:function',
-      \ 'p:property',
-      \ 't:type_alias',
-      \ 's:type_structure',
-      \ 'e:enumeration',
-      \ 'M:preprocessor_macro',
-      \ ],
-      \ 'sro'        : ' ',
-      \ 'kind2scope' : {
-      \ 'i' : 'interface',
-      \ 'I' : 'implementation',
-      \ 'p' : 'Protocol',
-      \ 's' : 'type_structure',
-      \ 'e' : 'enumeration'
-      \ },
-      \ 'scope2kind' : {
-      \ 'interface'      : 'i',
-      \ 'implementation' : 'I',
-      \ 'Protocol'       : 'p',
-      \ 'type_structure' : 's',
-      \ 'enumeration'    : 'e'
-      \ }
-      \ }
-
 let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.9.0/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/clang'
 
@@ -355,4 +321,4 @@ set foldmethod=syntax
 set foldlevel=2
 autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
 autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
-
+set mouse=a
