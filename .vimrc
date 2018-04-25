@@ -59,6 +59,7 @@ if has('nvim')
   call dein#add('fishbullet/deoplete-ruby')
   call dein#add('alexgenco/neovim-ruby')
   call dein#add('steelsojka/deoplete-flow')
+  call dein#add('uplus/deoplete-solargraph')
 else
   call dein#add('Shougo/neocomplete.vim')
 endif
@@ -267,6 +268,7 @@ nnoremap \ed :!dogma %:p
 nnoremap \ec :!mix credo %:p
 nnoremap \d :ExDoc
 nnoremap <F8> :NERDTreeFind <CR>
+nnoremap <F2> :NERDTreeToggle <CR>
 nnoremap <F9> :Dispatch<CR>
 nnoremap <F7> :Start
 
