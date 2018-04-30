@@ -79,7 +79,6 @@ call dein#add('w0ng/vim-hybrid')
 call dein#add('rakr/vim-one')
 call dein#add('dracula/vim')
 call dein#add('powerman/vim-plugin-AnsiEsc')
-call dein#add('rakr/vim-one')
 call dein#add('NLKNguyen/papercolor-theme')
 call dein#add('vim-scripts/pyte')
 call dein#add('mtth/scratch.vim')
@@ -198,7 +197,6 @@ if has("gui_macvim")
   set background=light
   colorscheme one
 else
-  set termguicolors
   set background=light
   colorscheme one
 end
