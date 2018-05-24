@@ -25,6 +25,7 @@ call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('tpope/vim-fugitive')
 call dein#add('tpope/vim-dispatch')
+call dein#add('benmills/vimux')
 call dein#add('vim-scripts/L9')
 call dein#add('airblade/vim-gitgutter')
 
@@ -322,3 +323,6 @@ set foldlevel=2
 autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
 autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 set mouse=a
+
+let g:VimuxOrientation = "h"
+let g:VimuxHeight = "40"
