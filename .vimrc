@@ -268,7 +268,7 @@ nnoremap \ec :!mix credo %:p
 nnoremap \d :ExDoc
 nnoremap <F8> :NERDTreeFind <CR>
 nnoremap <F2> :NERDTreeToggle <CR>
-nnoremap <F9> :Dispatch<CR>
+nnoremap <F9> :call VimuxRunLastCommand()<CR>
 nnoremap <F7> :Start
 
 "vim-test
@@ -326,3 +326,4 @@ set mouse=a
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
+nnoremap \rc :call VimuxRunCommand("

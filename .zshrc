@@ -48,3 +48,4 @@ zle -N down-line-or-beginning-search
 
 export PATH=~/work/opensource/dogma:$PATH
 export TERM=screen-256color
+eval "$(rbenv init -)"
