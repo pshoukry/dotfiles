@@ -92,6 +92,7 @@ call dein#add('tpope/vim-bundler')
 
 "Python
 call dein#add('python-mode/python-mode')
+"call dein#add('davidhalter/jedi-vim')
 
 " Coffee Script
 call dein#add('kchmck/vim-coffee-script')
@@ -141,6 +142,10 @@ call dein#add('posva/vim-vue')
 
 "TDD
 call dein#add('janko-m/vim-test')
+
+"Rust
+call dein#add('rust-lang/rust.vim')
+
 " Required:
 call dein#end()
 
@@ -176,7 +181,7 @@ nmap <F6> :TagbarToggle<CR>
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -204,6 +209,7 @@ end
 
 "Jasmine react tests
 au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
+au BufRead,BufNewFile *.js set filetype=javascript syntax=javascript
 
 "Stylus
 au BufRead,BufNewFile *.styl set filetype=css syntax=css omnifunc=syntaxcomplete#Complete
@@ -310,7 +316,7 @@ let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/3.9.0/lib/l
 let g:deoplete#sources#clang#clang_header	 = '/usr/local/Cellar/llvm/3.9.0/lib/clang'
 
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'yarn run eslint'
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 " Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
