@@ -270,6 +270,7 @@ nnoremap <F8> :NERDTreeFind <CR>
 nnoremap <F2> :NERDTreeToggle <CR>
 nnoremap <F9> :call VimuxRunLastCommand()<CR>
 nnoremap <F7> :Start
+nnoremap <F3> :!mix format %:p<CR>
 
 "vim-test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -329,3 +330,12 @@ let g:VimuxHeight = "40"
 nnoremap \rc :call VimuxRunCommand("
 
 let g:deoplete#sources#jedi#show_docstring=1
+
+set autoread
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
