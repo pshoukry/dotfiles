@@ -333,7 +333,7 @@ set mouse=a
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
-nnoremap \rc :call VimuxRunCommand("
+nnoremap \rc :call VimuxRunCommand("")<left><left>
 
 let g:deoplete#sources#jedi#show_docstring=1
 
