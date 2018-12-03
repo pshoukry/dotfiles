@@ -277,6 +277,7 @@ nnoremap <F9> :call VimuxRunLastCommand()<CR>
 nnoremap <leader>vq :VimuxCloseRunner<CR>
 nnoremap <leader>vp :VimuxPromptCommand<CR>
 nnoremap <F7> :Start
+nnoremap <F3> :!mix format %:p<CR>
 
 "vim-test
 nmap <silent> <leader>t :TestNearest<CR>
@@ -333,6 +334,15 @@ set mouse=a
 
 let g:VimuxOrientation = "h"
 let g:VimuxHeight = "40"
-nnoremap \rc :call VimuxRunCommand("
+nnoremap \rc :call VimuxRunCommand("")<left><left>
 
 let g:deoplete#sources#jedi#show_docstring=1
+
+set autoread
+set number relativenumber
+
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+augroup END
