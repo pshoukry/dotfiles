@@ -60,7 +60,6 @@ if has('nvim')
   call dein#add('fishbullet/deoplete-ruby')
   call dein#add('alexgenco/neovim-ruby')
   call dein#add('steelsojka/deoplete-flow')
-  call dein#add('uplus/deoplete-solargraph')
 else
   call dein#add('Shougo/neocomplete.vim')
 endif
@@ -112,7 +111,6 @@ call dein#add('vimwiki/vimwiki')
 call dein#add('pangloss/vim-javascript')
 call dein#add('othree/javascript-libraries-syntax.vim')
 call dein#add('matthewsimo/angular-vim-snippets')
-call dein#add('claco/jasmine.vim')
 call dein#add('burnettk/vim-angular')
 
 "Jade
@@ -208,8 +206,9 @@ else
 end
 
 "Jasmine react tests
-au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
 au BufRead,BufNewFile *.js set filetype=javascript syntax=javascript
+au BufRead,BufNewFile *test.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
+au BufRead,BufNewFile *spec.js set filetype=jasmine.javascript syntax=jasmine omnifunc=syntaxcomplete#Complete
 
 "Stylus
 au BufRead,BufNewFile *.styl set filetype=css syntax=css omnifunc=syntaxcomplete#Complete
@@ -275,6 +274,8 @@ nnoremap \d :ExDoc
 nnoremap <F8> :NERDTreeFind <CR>
 nnoremap <F2> :NERDTreeToggle <CR>
 nnoremap <F9> :call VimuxRunLastCommand()<CR>
+nnoremap <leader>vq :VimuxCloseRunner<CR>
+nnoremap <leader>vp :VimuxPromptCommand<CR>
 nnoremap <F7> :Start
 
 "vim-test
