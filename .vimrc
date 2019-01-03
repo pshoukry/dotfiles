@@ -113,6 +113,10 @@ call dein#add('othree/javascript-libraries-syntax.vim')
 call dein#add('matthewsimo/angular-vim-snippets')
 call dein#add('burnettk/vim-angular')
 
+"Typescript
+call dein#add('HerringtonDarkholme/yats.vim')
+call dein#add('mhartington/nvim-typescript', {'build': './install.sh'})
+
 "Jade
 call dein#add('digitaltoad/vim-jade')
 
