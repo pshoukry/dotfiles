@@ -148,6 +148,9 @@ call dein#add('janko-m/vim-test')
 "Rust
 call dein#add('rust-lang/rust.vim')
 
+"Terrafrom
+call dein#add('hashivim/vim-terraform')
+
 " Required:
 call dein#end()
 
@@ -350,3 +353,5 @@ augroup numbertoggle
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
 augroup END
+
+let g:terraform_align=1
