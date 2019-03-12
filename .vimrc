@@ -346,12 +346,5 @@ nnoremap \rc :call VimuxRunCommand("")<left><left>
 let g:deoplete#sources#jedi#show_docstring=1
 
 set autoread
-set number relativenumber
-
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
 
 let g:terraform_align=1
