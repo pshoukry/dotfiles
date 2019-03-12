@@ -24,6 +24,7 @@ call dein#add('Shougo/vimshell')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-rhubarb')
 call dein#add('tpope/vim-dispatch')
 call dein#add('benmills/vimux')
 call dein#add('vim-scripts/L9')
