@@ -281,8 +281,8 @@ nnoremap \d :ExDoc
 nnoremap <F8> :NERDTreeFind <CR>
 nnoremap <F2> :NERDTreeToggle <CR>
 nnoremap <F9> :call VimuxRunLastCommand()<CR>
-nnoremap <leader>vq :VimuxCloseRunner<CR>
-nnoremap <leader>vp :VimuxPromptCommand<CR>
+nnoremap <F4> :VimuxCloseRunner<CR>
+nnoremap <F5> :VimuxPromptCommand<CR>
 nnoremap <F7> :Start
 nnoremap <F3> :!mix format %:p<CR>
 
