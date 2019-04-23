@@ -24,6 +24,7 @@ call dein#add('Shougo/vimshell')
 call dein#add('Shougo/vimproc.vim', {'build' : 'make'})
 
 call dein#add('tpope/vim-fugitive')
+call dein#add('tpope/vim-rhubarb')
 call dein#add('tpope/vim-dispatch')
 call dein#add('benmills/vimux')
 call dein#add('vim-scripts/L9')
@@ -346,12 +347,5 @@ nnoremap \rc :call VimuxRunCommand("")<left><left>
 let g:deoplete#sources#jedi#show_docstring=1
 
 set autoread
-set number relativenumber
-
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
 
 let g:terraform_align=1
