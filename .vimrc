@@ -349,3 +349,4 @@ let g:deoplete#sources#jedi#show_docstring=1
 set autoread
 
 let g:terraform_align=1
+let g:alchemist_compile_basepath = '/app/'
