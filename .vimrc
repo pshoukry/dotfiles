@@ -66,3 +66,37 @@ set background=light
 " Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
 
+" Reload if file changes
+set autoread
+
+" Syntax
+syntax enable
+set tabstop=2 shiftwidth=2 expandtab
+autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
+autocmd Filetype go setlocal ts=4 sts=4 sw=4 noexpandtab
+
+au BufRead,BufNewFile *.txt set filetype=markdown
+
+set number
+runtime macros/matchit.vim
+set spell spelllang=en_us
+set nowrap
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+au ColorScheme * highlight ExtraWhitespace guibg=DarkRed
+au BufEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhiteSpace /\s\+$/
+
+set backspace=indent,eol,start
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+
