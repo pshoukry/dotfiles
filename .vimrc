@@ -17,6 +17,9 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
+" Git Support
+Plug 'tpope/vim-fugitive'
+
 " Initialize plugin system
 call plug#end()
 
@@ -32,7 +35,10 @@ set rtp+=/usr/local/opt/fzf
 
 " Colorscheme
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:gruvbox_contrast_light="hard"
+let g:gruvbox_contrast_light = "hard"
+let g:gruvbox_bold = 1
+let g:gruvbox_italic = 1
+let g:gruvbox_underline = 1
 colorscheme gruvbox
 set background=light
 
