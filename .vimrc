@@ -17,11 +17,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-" Fuzzy finder
-Plug 'junegunn/fzf'
-
-" 
-
 " Initialize plugin system
 call plug#end()
 
@@ -29,8 +24,15 @@ call plug#end()
 " Autocomplete configuration
 " Enable on startup
 let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_completion_start_length = 1
+
+" Enable fuzzy finding
+set rtp+=/usr/local/opt/fzf
 
 " Colorscheme
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+let g:gruvbox_contrast_light="hard"
 colorscheme gruvbox
 set background=light
 
