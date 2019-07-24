@@ -19,6 +19,8 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'slashmili/alchemist.vim'
+Plug 'elixir-editors/vim-elixir'
 
 " Git Support
 Plug 'tpope/vim-fugitive'
@@ -33,6 +35,8 @@ call plug#end()
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_completion_start_length = 1
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 
 " Required for operations modifying multiple buffers like rename.
 set hidden
@@ -100,3 +104,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 
+" Deoplete selction box
+inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
