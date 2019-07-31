@@ -107,3 +107,5 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 " Deoplete selction box
 inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
+
+let g:alchemist_compile_basepath = '/app/'
