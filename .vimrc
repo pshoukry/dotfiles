@@ -79,6 +79,7 @@ syntax enable
 set tabstop=2 shiftwidth=2 expandtab
 autocmd Filetype python setlocal ts=4 sts=4 sw=4 expandtab
 autocmd Filetype go setlocal ts=4 sts=4 sw=4 noexpandtab
+let &colorcolumn=join(range(81,999),",") " Darker background above 80 chars width
 
 au BufRead,BufNewFile *.txt set filetype=markdown
 
