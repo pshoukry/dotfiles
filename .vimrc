@@ -7,6 +7,8 @@ Plug 'honza/vim-snippets'
 " Conveninences
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'scrooloose/nerdtree'
 
 " Shortcuts
 Plug 'christoomey/vim-tmux-navigator'
@@ -25,6 +27,9 @@ Plug 'elixir-editors/vim-elixir'
 " Git Support
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+" Vimwiki
+Plug 'vimwiki/vimwiki'
 
 " Initialize plugin system
 call plug#end()
@@ -55,6 +60,7 @@ nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <c-p> :FZF<CR>
+nnoremap <silent> <c-i> :NERDTreeToggle<CR>
 
 " Enable fuzzy finding
 set rtp+=/usr/local/opt/fzf
@@ -84,6 +90,7 @@ let &colorcolumn=join(range(81,999),",") " Darker background above 80 chars widt
 au BufRead,BufNewFile *.txt set filetype=markdown
 
 set number
+set mouse=a
 runtime macros/matchit.vim
 set spell spelllang=en_us
 set nowrap
