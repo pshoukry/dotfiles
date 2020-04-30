@@ -9,6 +9,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
+Plug 'benmills/vimux'
 
 " Shortcuts
 Plug 'christoomey/vim-tmux-navigator'
@@ -38,7 +39,6 @@ call plug#end()
 " Autocomplete configuration
 " Enable on startup
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
 let g:deoplete#auto_completion_start_length = 1
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
