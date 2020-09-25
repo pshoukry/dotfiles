@@ -7,21 +7,24 @@ Plug 'honza/vim-snippets'
 " Conveninences
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
 Plug 'benmills/vimux'
+Plug 'tpope/vim-surround'
 
 " Shortcuts
 Plug 'christoomey/vim-tmux-navigator'
 
 " Colorscheme
-Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
 
 " Language support
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
 Plug 'slashmili/alchemist.vim'
 Plug 'elixir-editors/vim-elixir'
 
@@ -47,31 +50,25 @@ set omnifunc=syntaxcomplete#Complete
 set hidden
 
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-    \ }
+      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+      \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+      \ 'python': ['/usr/local/bin/pyls'],
+      \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+      \ }
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
 nnoremap <silent> <c-p> :FZF<CR>
-nnoremap <silent> <c-i> :NERDTreeToggle<CR>
+nnoremap <silent> <c-u> :NERDTreeToggle<CR>
+nnoremap <silent> <F6> :VimuxPromptCommand<CR>
+nnoremap <silent> <F2> :VimuxRunLastCommand<CR>
 
 " Enable fuzzy finding
 set rtp+=/usr/local/opt/fzf
 
 " Colorscheme
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-let g:gruvbox_contrast_light = "hard"
-let g:gruvbox_bold = 1
-let g:gruvbox_italic = 1
-let g:gruvbox_underline = 1
-colorscheme gruvbox
+colorscheme PaperColor
 set background=light
 
 " Ugly fix for tmux, mac and nvim clipboard
@@ -118,3 +115,4 @@ inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
 let g:alchemist_compile_basepath = '/app/'
+let g:python2_host_prog = '/usr/bin/python3'
