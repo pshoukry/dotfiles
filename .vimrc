@@ -69,7 +69,11 @@ set rtp+=/usr/local/opt/fzf
 
 " Colorscheme
 colorscheme PaperColor
-set background=light
+if strftime("%H") < 12
+  set background=light
+else
+  set background=dark
+endif
 
 " Ugly fix for tmux, mac and nvim clipboard
 set clipboard=unnamed
