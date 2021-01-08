@@ -19,7 +19,7 @@ Plug 'christoomey/vim-tmux-navigator'
 
 " Colorscheme
 Plug 'NLKNguyen/papercolor-theme'
-
+Plug 'noahfrederick/vim-hemisu'
 " Language support
 Plug 'autozimu/LanguageClient-neovim', {
       \ 'branch': 'next',
@@ -34,6 +34,9 @@ Plug 'airblade/vim-gitgutter'
 
 " Vimwiki
 Plug 'vimwiki/vimwiki'
+
+" Language Support
+Plug 'OmniSharp/omnisharp-vim' "c#
 
 " Initialize plugin system
 call plug#end()
@@ -69,7 +72,8 @@ set rtp+=/usr/local/opt/fzf
 
 " Colorscheme
 colorscheme PaperColor
-if strftime("%H") < 12
+
+if strftime("%H") < 17
   set background=light
 else
   set background=dark
