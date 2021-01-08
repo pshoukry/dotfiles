@@ -124,3 +124,6 @@ inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
 let g:alchemist_compile_basepath = '/app/'
 let g:python2_host_prog = '/usr/bin/python3'
+
+" Omnisharp-vim     
+let g:OmniSharp_server_use_mono = 1
