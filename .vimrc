@@ -64,8 +64,8 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> <c-p> :FZF<CR>
 nnoremap <silent> <c-u> :NERDTreeToggle<CR>
-nnoremap <silent> <F6> :VimuxPromptCommand<CR>
-nnoremap <silent> <F2> :VimuxRunLastCommand<CR>
+nnoremap <silent> <F2> :VimuxPromptCommand<CR>
+nnoremap <silent> <F6> :VimuxRunLastCommand<CR>
 
 " Enable fuzzy finding
 set rtp+=/usr/local/opt/fzf
@@ -125,5 +125,7 @@ inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 let g:alchemist_compile_basepath = '/app/'
 let g:python2_host_prog = '/usr/bin/python3'
 
-" Omnisharp-vim     
+" Omnisharp-vim
 let g:OmniSharp_server_use_mono = 1
+let g:OmniSharp_timeout = 5
+let g:OmniSharp_selector_ui = 'fzf'
