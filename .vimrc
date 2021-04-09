@@ -13,6 +13,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
 Plug 'benmills/vimux'
 Plug 'tpope/vim-surround'
+Plug 'preservim/tagbar'
+Plug 'junegunn/fzf.vim'
+Plug 'vim-airline/vim-airline'
 
 " Shortcuts
 Plug 'christoomey/vim-tmux-navigator'
@@ -66,6 +69,36 @@ nnoremap <silent> <c-p> :FZF<CR>
 nnoremap <silent> <c-u> :NERDTreeToggle<CR>
 nnoremap <silent> <F2> :VimuxPromptCommand<CR>
 nnoremap <silent> <F6> :VimuxRunLastCommand<CR>
+nnoremap <F8> :TagbarToggle<CR>
+
+" Tagbar Elixir support
+let g:tagbar_type_elixir = {
+    \ 'ctagstype' : 'elixir',
+    \ 'kinds' : [
+        \ 'p:protocols',
+        \ 'm:modules',
+        \ 'e:exceptions',
+        \ 'y:types',
+        \ 'd:delegates',
+        \ 'f:functions',
+        \ 'c:callbacks',
+        \ 'a:macros',
+        \ 't:tests',
+        \ 'i:implementations',
+        \ 'o:operators',
+        \ 'r:records'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 'p' : 'protocol',
+        \ 'm' : 'module'
+    \ },
+    \ 'scope2kind' : {
+        \ 'protocol' : 'p',
+        \ 'module' : 'm'
+    \ },
+    \ 'sort' : 0
+\ }
 
 " Enable fuzzy finding
 set rtp+=/usr/local/opt/fzf
@@ -127,5 +160,4 @@ let g:python2_host_prog = '/usr/bin/python3'
 
 " Omnisharp-vim
 let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_timeout = 5
 let g:OmniSharp_selector_ui = 'fzf'
