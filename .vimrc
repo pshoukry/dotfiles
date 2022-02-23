@@ -25,22 +25,28 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'noahfrederick/vim-hemisu'
 " Language support
-Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
-Plug 'slashmili/alchemist.vim'
+" Plug 'slashmili/alchemist.vim'
 Plug 'elixir-editors/vim-elixir'
+Plug 'williamboman/nvim-lsp-installer'
 
 " Git Support
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'will133/vim-dirdiff'
 
 " Vimwiki
 Plug 'vimwiki/vimwiki'
 
 " Language Support
-Plug 'OmniSharp/omnisharp-vim' "c#
+" Plug 'OmniSharp/omnisharp-vim' "c#
+Plug 'neovim/nvim-lspconfig'
+Plug 'deoplete-plugins/deoplete-lsp'
+
+" Flutter
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
 
 " Initialize plugin system
 call plug#end()
@@ -56,15 +62,6 @@ set omnifunc=syntaxcomplete#Complete
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-let g:LanguageClient_serverCommands = {
-      \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-      \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-      \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
-      \ 'python': ['/usr/local/bin/pyls'],
-      \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
-      \ }
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> <c-p> :FZF<CR>
 nnoremap <silent> <c-u> :NERDTreeToggle<CR>
@@ -162,3 +159,25 @@ let g:python2_host_prog = '/usr/bin/python3'
 " Omnisharp-vim
 let g:OmniSharp_server_use_mono = 1
 let g:OmniSharp_selector_ui = 'fzf'
+
+
+" Language servers configuration
+ lua << EOF
+ local lsp_installer = require("nvim-lsp-installer")
+
+-- Register a handler that will be called for each installed server when it's ready (i.e. when installation is finished
+-- or if the server is already installed).
+lsp_installer.on_server_ready(function(server)
+    local opts = {}
+
+    -- (optional) Customize the options passed to the server
+    -- if server.name == "tsserver" then
+    --     opts.root_dir = function() ... end
+    -- end
+
+    -- This setup() function will take the provided server configuration and decorate it with the necessary properties
+    -- before passing it onwards to lspconfig.
+    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+    server:setup(opts)
+end)
+EOF
