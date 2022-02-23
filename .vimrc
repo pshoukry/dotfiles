@@ -25,7 +25,6 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'noahfrederick/vim-hemisu'
 " Language support
-" Plug 'slashmili/alchemist.vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'williamboman/nvim-lsp-installer'
 
@@ -38,7 +37,6 @@ Plug 'will133/vim-dirdiff'
 Plug 'vimwiki/vimwiki'
 
 " Language Support
-" Plug 'OmniSharp/omnisharp-vim' "c#
 Plug 'neovim/nvim-lspconfig'
 Plug 'deoplete-plugins/deoplete-lsp'
 
@@ -153,13 +151,7 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 inoremap <expr><C-j> pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr><C-k> pumvisible() ? "\<C-p>" : "\<Up>"
 
-let g:alchemist_compile_basepath = '/app/'
 let g:python2_host_prog = '/usr/bin/python3'
-
-" Omnisharp-vim
-let g:OmniSharp_server_use_mono = 1
-let g:OmniSharp_selector_ui = 'fzf'
-
 
 " Language servers configuration
  lua << EOF
