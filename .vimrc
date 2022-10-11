@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'benmills/vimux'
 Plug 'tpope/vim-surround'
 Plug 'preservim/tagbar'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-eunuch'
@@ -95,9 +96,6 @@ let g:tagbar_type_elixir = {
       \ },
       \ 'sort' : 0
       \ }
-
-" Enable fuzzy finding
-set rtp+=/usr/local/opt/fzf
 
 " Colorscheme
 colorscheme PaperColor
