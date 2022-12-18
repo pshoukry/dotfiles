@@ -1,17 +1,15 @@
 call plug#begin('~/.vim/plugged')
 
 " Snippets support
-Plug 'SirVer/ultisnips'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'rafamadriz/friendly-snippets'
 
 " Conveninences
 Plug 'scrooloose/nerdtree'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdtree'
 Plug 'benmills/vimux'
-Plug 'tpope/vim-surround'
 Plug 'preservim/tagbar'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -110,9 +108,6 @@ else
   set background=dark
 endif
 
-" Ugly fix for tmux, mac and nvim clipboard
-set clipboard=unnamed
-
 " Reload if file changes
 set autoread
 
@@ -127,15 +122,12 @@ au BufRead,BufNewFile *.txt set filetype=markdown
 
 set number
 set mouse=a
-runtime macros/matchit.vim
 set spell spelllang=en_us
 set nowrap
 
 highlight ExtraWhitespace ctermbg=red guibg=red
 au ColorScheme * highlight ExtraWhitespace guibg=DarkRed
 au BufEnter * match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhiteSpace /\s\+$/
 
 set backspace=indent,eol,start
 " Enable omni completion.
@@ -148,12 +140,30 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-
 autocmd BufNewFile,BufRead *.heex :set filetype=eelixir
 
-let g:python2_host_prog = '/usr/bin/python3'
+" NOTE: You can use other key to expand snippet.
 
-set completeopt=menu,menuone,noselect
+" Expand
+imap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+smap <expr> <C-j>   vsnip#expandable()  ? '<Plug>(vsnip-expand)'         : '<C-j>'
+
+" Expand or jump
+imap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+smap <expr> <C-l>   vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>'
+
+" Jump forward or backward
+imap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+smap <expr> <Tab>   vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<Tab>'
+imap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+smap <expr> <S-Tab> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<S-Tab>'
+
+" Select or cut text to use as $TM_SELECTED_TEXT in the next snippet.
+" See https://github.com/hrsh7th/vim-vsnip/pull/50
+nmap        s   <Plug>(vsnip-select-text)
+xmap        s   <Plug>(vsnip-select-text)
+nmap        S   <Plug>(vsnip-cut-text)
+xmap        S   <Plug>(vsnip-cut-text)
 
 lua <<EOF
 require("mason").setup()
@@ -163,14 +173,22 @@ require("mason-lspconfig").setup()
 -- require("lspconfig").sumneko_lua.setup {}
 -- require("lspconfig").rust_analyzer.setup {}
 -- ...
--- Set up nvim-cmp.
+local has_words_before = function()
+  unpack = unpack or table.unpack
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
 local cmp = require'cmp'
 
 cmp.setup({
 snippet = {
   -- REQUIRED - you must specify a snippet engine
   expand = function(args)
-  vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+  vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
   end,
   },
 window = {
@@ -252,6 +270,4 @@ require('lspconfig')['tailwindcss'].setup {
   capabilities = capabilities
   }
 EOF
-" UltiSnips configuration
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
