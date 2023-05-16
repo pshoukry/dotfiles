@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'rafamadriz/friendly-snippets'
-
+Plug 'hrsh7th/cmp-path'
 " Conveninences
 Plug 'scrooloose/nerdtree'
 Plug 'terryma/vim-multiple-cursors'
@@ -38,12 +38,11 @@ Plug 'vimwiki/vimwiki'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
+
 
 " Flutter
 Plug 'dart-lang/dart-vim-plugin'
@@ -101,13 +100,12 @@ let g:tagbar_type_elixir = {
 
 " Colorscheme
 colorscheme PaperColor
-
-if strftime("%H") < 17
-  set background=light
+let hour = strftime("%H")
+if hour >= 6 && hour < 19
+    set background=light
 else
-  set background=dark
+    set background=dark
 endif
-
 " Reload if file changes
 set autoread
 
