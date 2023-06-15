@@ -318,7 +318,7 @@ require('lspconfig')['elixirls'].setup {
 require('lspconfig')['tailwindcss'].setup {
   capabilities = capabilities
 }
-require('lspconfig')['ruby-lsp'].setup {
+require('lspconfig')['ruby_ls'].setup {
   capabilities = capabilities
 }
 require('lspconfig')['intelephense'].setup {
