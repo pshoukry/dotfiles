@@ -24,6 +24,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'noahfrederick/vim-hemisu'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 " Language support
 Plug 'elixir-editors/vim-elixir'
 
@@ -100,12 +102,11 @@ let g:tagbar_type_elixir = {
       \ }
 
 " Colorscheme
-colorscheme PaperColor
 let hour = strftime("%H")
 if hour >= 4 && hour < 20
-  set background=light
+  colorscheme catppuccin-latte
 else
-  set background=dark
+  colorscheme catppuccin-mocha
 endif
 " Reload if file changes
 set autoread
