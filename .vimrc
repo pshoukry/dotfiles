@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-eunuch'
 Plug 'mileszs/ack.vim'
 Plug 'onsails/lspkind.nvim'
+
 " Shortcuts
 Plug 'christoomey/vim-tmux-navigator'
 
@@ -36,6 +37,7 @@ Plug 'will133/vim-dirdiff'
 
 " Vimwiki
 Plug 'vimwiki/vimwiki'
+Plug 'tools-life/taskwiki'
 
 " Language Support
 Plug 'williamboman/mason.nvim'
@@ -104,7 +106,7 @@ let g:tagbar_type_elixir = {
 " Colorscheme
 let hour = strftime("%H")
 if hour >= 4 && hour < 20
-  colorscheme catppuccin-latte
+  colorscheme catppuccin-latte 
 else
   colorscheme catppuccin-mocha
 endif
@@ -325,5 +327,12 @@ require('lspconfig')['ruby_ls'].setup {
 require('lspconfig')['intelephense'].setup {
   capabilities = capabilities
 }
+require('lspconfig')['terraformls'].setup {
+  capabilities = capabilities
+}
 EOF
+autocmd BufWritePre *.tfvars lua vim.lsp.buf.format()
+autocmd BufWritePre *.tf lua vim.lsp.buf.format()
+
+let g:taskwiki_sort_orders={"MyTasks": "priority-,due-,project+"}
 
