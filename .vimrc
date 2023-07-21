@@ -17,6 +17,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-eunuch'
 Plug 'mileszs/ack.vim'
 Plug 'onsails/lspkind.nvim'
+Plug 'tpope/vim-surround'
 
 " Shortcuts
 Plug 'christoomey/vim-tmux-navigator'
@@ -186,52 +187,52 @@ vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mod
 end
 local cmp = require'cmp'
 cmp.setup({
-  formatting = {
-    fields = { "abbr", "menu", "kind" },
-    format = function(entry, item)
-        -- Define menu shorthand for different completion sources.
-        local menu_icon = {
-            nvim_lsp = "NLSP",
-            nvim_lua = "NLUA",
-            luasnip  = "LSNP",
-            buffer   = "BUFF",
-            path     = "PATH",
-        }
-        -- Set the menu "icon" to the shorthand for each completion source.
-        item.menu = menu_icon[entry.source.name]
+formatting = {
+  fields = { "abbr", "menu", "kind" },
+  format = function(entry, item)
+  -- Define menu shorthand for different completion sources.
+  local menu_icon = {
+    nvim_lsp = "NLSP",
+    nvim_lua = "NLUA",
+    luasnip  = "LSNP",
+    buffer   = "BUFF",
+    path     = "PATH",
+  }
+  -- Set the menu "icon" to the shorthand for each completion source.
+  item.menu = menu_icon[entry.source.name]
 
-        -- Set the fixed width of the completion menu to 60 characters.
-        -- fixed_width = 20
+  -- Set the fixed width of the completion menu to 60 characters.
+  -- fixed_width = 20
 
-        -- Set 'fixed_width' to false if not provided.
-        fixed_width = fixed_width or false
+  -- Set 'fixed_width' to false if not provided.
+  fixed_width = fixed_width or false
 
-        -- Get the completion entry text shown in the completion window.
-        local content = item.abbr
+  -- Get the completion entry text shown in the completion window.
+  local content = item.abbr
 
-        -- Set the fixed completion window width.
-        if fixed_width then
-            vim.o.pumwidth = fixed_width
-        end
+  -- Set the fixed completion window width.
+  if fixed_width then
+    vim.o.pumwidth = fixed_width
+    end
 
-        -- Get the width of the current window.
-        local win_width = vim.api.nvim_win_get_width(0)
+    -- Get the width of the current window.
+    local win_width = vim.api.nvim_win_get_width(0)
 
-        -- Set the max content width based on either: 'fixed_width'
-        -- or a percentage of the window width, in this case 20%.
-        -- We subtract 10 from 'fixed_width' to leave room for 'kind' fields.
-        local max_content_width = fixed_width and fixed_width - 10 or math.floor(win_width * 0.2)
+    -- Set the max content width based on either: 'fixed_width'
+    -- or a percentage of the window width, in this case 20%.
+    -- We subtract 10 from 'fixed_width' to leave room for 'kind' fields.
+    local max_content_width = fixed_width and fixed_width - 10 or math.floor(win_width * 0.2)
 
-        -- Truncate the completion entry text if it's longer than the
-        -- max content width. We subtract 3 from the max content width
-        -- to account for the "..." that will be appended to it.
-        if #content > max_content_width then
-            item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. "..."
-        else
-            item.abbr = content .. (" "):rep(max_content_width - #content)
-        end
-        return item
-    end,
+    -- Truncate the completion entry text if it's longer than the
+    -- max content width. We subtract 3 from the max content width
+    -- to account for the "..." that will be appended to it.
+    if #content > max_content_width then
+      item.abbr = vim.fn.strcharpart(content, 0, max_content_width - 3) .. "..."
+    else
+      item.abbr = content .. (" "):rep(max_content_width - #content)
+      end
+      return item
+      end,
 },
 snippet = {
   -- REQUIRED - you must specify a snippet engine
@@ -240,12 +241,12 @@ snippet = {
   end,
 },
 window = {
-   completion = cmp.config.window.bordered({
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-        }),
-   documentation = cmp.config.window.bordered({
-            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
-        }),
+  completion = cmp.config.window.bordered({
+  winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+  }),
+  documentation = cmp.config.window.bordered({
+  winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+  }),
 },
 mapping = {
 
@@ -336,3 +337,10 @@ autocmd BufWritePre *.tf lua vim.lsp.buf.format()
 
 let g:taskwiki_sort_orders={"MyTasks": "priority-,due-,project+"}
 
+if executable('terraform-ls')
+  au User lsp_setup call lsp#register_server({
+        \ 'name': 'terraform-ls',
+        \ 'cmd': {server_info->['terraform-ls', 'serve']},
+        \ 'whitelist': ['terraform'],
+        \ })
+endif
