@@ -27,6 +27,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'noahfrederick/vim-hemisu'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'maxmx03/solarized.nvim'
 
 " Language support
 Plug 'elixir-editors/vim-elixir'
@@ -107,9 +108,10 @@ let g:tagbar_type_elixir = {
 " Colorscheme
 let hour = strftime("%H")
 if hour >= 4 && hour < 20
-  colorscheme catppuccin-latte 
+  set background=light
+  colorscheme Papercolor
 else
-  colorscheme catppuccin-mocha
+  colorscheme tokyonight-night
 endif
 " Reload if file changes
 set autoread
@@ -329,6 +331,15 @@ require('lspconfig')['intelephense'].setup {
   capabilities = capabilities
 }
 require('lspconfig')['terraformls'].setup {
+  capabilities = capabilities
+}
+require('lspconfig')['rust_analyzer'].setup {
+  capabilities = capabilities
+}
+require('lspconfig')['java_language_server'].setup {
+  capabilities = capabilities
+}
+require('lspconfig')['jedi_language_server'].setup {
   capabilities = capabilities
 }
 EOF
