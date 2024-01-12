@@ -2,12 +2,11 @@ return {
   -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
   { "folke/tokyonight.nvim" },
-
-  -- Configure LazyVim to load gruvbox
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "tokyonight-night",
-    },
+    "sainnhe/everforest",
+    config = function()
+      vim.cmd([[colorscheme everforest]])
+      vim.cmd([[set background=light]])
+    end,
   },
 }

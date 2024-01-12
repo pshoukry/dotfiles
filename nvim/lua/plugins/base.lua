@@ -28,15 +28,17 @@ return {
       "nvim-lua/plenary.nvim",
     },
   },
+  { "rcasia/neotest-java" },
   {
     "nvim-neotest/neotest",
     requires = {
-      "jfpedroza/neotest-elixir",
+      "pshoukry/neotest-elixir",
     },
     config = function()
       require("neotest").setup({
         adapters = {
           require("neotest-elixir")({}),
+          require("neotest-java")({}),
         },
       })
     end,
@@ -125,16 +127,6 @@ return {
     },
   },
   {
-    "folke/tokyonight.nvim",
-    opts = {
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
     opts = {
       setup = {
@@ -164,5 +156,17 @@ return {
         },
       },
     },
+  },
+  {
+    "dense-analysis/neural",
+    config = function()
+      require("neural").setup({
+        source = {
+          openai = {
+            api_key = vim.env.OPENAI_API_KEY,
+          },
+        },
+      })
+    end,
   },
 }
