@@ -1,12 +1,14 @@
 return {
   -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-  { "folke/tokyonight.nvim" },
   {
-    "sainnhe/everforest",
+    "catppuccin/nvim",
+  },
+  { "ellisonleao/gruvbox.nvim" },
+  {
+    "folke/tokyonight.nvim",
     config = function()
-      vim.cmd([[colorscheme everforest]])
-      vim.cmd([[set background=light]])
+      vim.cmd([[colorscheme tokyonight-day]])
     end,
   },
+  { "sainnhe/everforest" },
 }

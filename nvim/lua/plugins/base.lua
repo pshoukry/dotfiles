@@ -129,6 +129,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      format = { timeout_ms = 1000 },
+
       setup = {
         clangd = function(_, opts)
           opts.capabilities.offsetEncoding = { "utf-16" }
