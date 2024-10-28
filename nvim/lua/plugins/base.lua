@@ -32,7 +32,7 @@ return {
   {
     "nvim-neotest/neotest",
     requires = {
-      "pshoukry/neotest-elixir",
+      "jfpedroza/neotest-elixir",
     },
     config = function()
       require("neotest").setup({
